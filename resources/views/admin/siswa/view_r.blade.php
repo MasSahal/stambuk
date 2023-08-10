@@ -58,12 +58,12 @@
                                 <tr>
                                     <td>Semester</td>
                                     <td>:</td>
-                                    <td><?= $record->semester ?></td>
+                                    <td><?= $record->semester ?? '--' ?></td>
                                 </tr>
                                 <tr>
                                     <td>Tahun Ajar</td>
                                     <td>:</td>
-                                    <td><?= $record->th_pelajaran ?></td>
+                                    <td><?= $record->th_pelajaran ?? '--' ?></td>
                                 </tr>
                             </table>
                         </div>
@@ -82,12 +82,12 @@
                                     <tr>
                                         <td>1</td>
                                         <td>Sikap Spiritual</td>
-                                        <td>{{ $raport->sikap_spiritual }}</td>
+                                        <td>{{ $raport->sikap_spiritual ?? '--' }}</td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
                                         <td>Sikap Sosial</td>
-                                        <td>{{ $raport->sikap_sosial }}</td>
+                                        <td>{{ $raport->sikap_sosial ?? '--' }}</td>
                                     </tr>
                                 </tbody>
                             </table>

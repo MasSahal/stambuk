@@ -57,10 +57,10 @@
                                         <td>{{ $r->deskripsi }}</td>
                                         <td>
                                             <form action="{{ route('mapel.destroy', $r->idmapel) }}" method="POST">
-                                                <a name="" id="" class="btn btn-sm btn-info"
+                                                {{-- <a name="" id="" class="btn btn-sm btn-info"
                                                     href="{{ route('mapel.show', $r->idmapel) }}" role="button">
                                                     Lihat
-                                                </a>
+                                                </a> --}}
                                                 <a name="" id="" class="btn btn-sm btn-warning"
                                                     href="{{ route('mapel.edit', $r->idmapel) }}" role="button">
                                                     Edit

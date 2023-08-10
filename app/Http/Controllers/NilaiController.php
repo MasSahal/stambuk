@@ -15,7 +15,13 @@ class NilaiController extends Controller
      */
     public function index()
     {
-        $siswa = Siswa::all();
+        if (auth()->user()->role == 2) {
+            $user = DB::table('kelas')->where('idwali_kelas', '=', auth()->user()->id_join)->first();
+            $siswa = DB::table('siswa')->join('kelas', 'siswa.idkelas', '=', 'kelas.idkelas')->where('kelas.idkelas', '=', $user->idkelas)->get();
+        } else {
+            $siswa = DB::table('siswa')->join('kelas', 'siswa.idkelas', '=', 'kelas.idkelas')->get();
+        }
+
         foreach ($siswa as $i => $s) {
             $cek_nilai = DB::table('nilai')->where('idsiswa', '=', $s->idsiswa)->get();
             if (count($cek_nilai) > 0) {

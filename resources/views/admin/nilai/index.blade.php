@@ -22,6 +22,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Siswa</th>
+                                    <th>Nama Kelas</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -30,6 +31,7 @@
                                     <tr>
                                         <td>{{ $i += 1 }}</td>
                                         <td>{{ $r->nama_siswa }}</td>
+                                        <td>{{ $r->nama_kelas }}</td>
                                         <td>
                                             @if ($r->input_nilai)
                                                 <a name="" id="" class="btn btn-sm btn-secondary"
