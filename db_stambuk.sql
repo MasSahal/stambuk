@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 10, 2023 at 07:25 AM
+-- Generation Time: Aug 10, 2023 at 06:52 PM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.32
 
@@ -108,7 +108,8 @@ INSERT INTO `mapel` (`idmapel`, `nama_mapel`, `type`, `deskripsi`, `updated_at`,
 (3, 'Matematika', 'utama', 'Bgus cuy', '2023-08-09 03:59:51', '2023-08-09 03:59:51'),
 (4, 'IPS', 'utama', 'Ya Bagus Dong', '2023-08-09 04:00:14', '2023-08-09 04:00:14'),
 (5, 'Bahasa Cirebon', 'utama', 'Ya hrus Bgus', '2023-08-09 04:01:17', '2023-08-09 04:01:17'),
-(6, 'Aut ipsam reprehende', 'mulok', 'sqws', '2023-08-09 06:35:58', '2023-08-09 06:35:58');
+(6, 'Cirebonan', 'mulok', '--', '2023-08-10 17:12:07', '2023-08-09 06:35:58'),
+(7, 'Sundaan', 'mulok', 'Bagus', '2023-08-10 17:12:21', '2023-08-10 17:12:21');
 
 -- --------------------------------------------------------
 
@@ -168,7 +169,19 @@ INSERT INTO `nilai` (`idnilai`, `idsiswa`, `id_mapel`, `p_nilai`, `p_predikat`, 
 (9, 3, 3, 45, 'D', 'Kurang dalam Belajar', 11, 'E', 'Sangat Kurang dalam Belajar', '2023-08-09 20:10:14', '2023-08-09 20:10:14'),
 (10, 3, 4, 61, 'C', 'Cukup dalam Belajar', 42, 'D', 'Kurang dalam Belajar', '2023-08-09 20:10:14', '2023-08-09 20:10:14'),
 (11, 3, 5, 79, 'B', 'Baik dalam Belajar', 10, 'E', 'Sangat Kurang dalam Belajar', '2023-08-09 20:10:14', '2023-08-09 20:10:14'),
-(12, 3, 6, 98, 'A', 'Sangat Baik dalam Belajar', 21, 'E', 'Sangat Kurang dalam Belajar', '2023-08-09 20:10:14', '2023-08-09 20:10:14');
+(12, 3, 6, 98, 'A', 'Sangat Baik dalam Belajar', 21, 'E', 'Sangat Kurang dalam Belajar', '2023-08-09 20:10:14', '2023-08-09 20:10:14'),
+(13, 4, 1, 52, 'C', 'Cukup dalam Belajar', 89, 'A', 'Sangat Baik dalam Belajar', '2023-08-10 07:53:26', '2023-08-10 07:53:26'),
+(14, 4, 2, 44, 'D', 'Kurang dalam Belajar', 90, 'A', 'Sangat Baik dalam Belajar', '2023-08-10 07:53:26', '2023-08-10 07:53:26'),
+(15, 4, 3, 54, 'C', 'Cukup dalam Belajar', 44, 'D', 'Kurang dalam Belajar', '2023-08-10 07:53:26', '2023-08-10 07:53:26'),
+(16, 4, 4, 72, 'B', 'Baik dalam Belajar', 22, 'E', 'Sangat Kurang dalam Belajar', '2023-08-10 07:53:27', '2023-08-10 07:53:27'),
+(17, 4, 5, 47, 'D', 'Kurang dalam Belajar', 50, 'C', 'Cukup dalam Belajar', '2023-08-10 07:53:27', '2023-08-10 07:53:27'),
+(18, 4, 6, 99, 'A', 'Sangat Baik dalam Belajar', 75, 'B', 'Baik dalam Belajar', '2023-08-10 07:53:27', '2023-08-10 07:53:27'),
+(19, 5, 1, 42, 'D', 'Kurang dalam Belajar', 52, 'C', 'Cukup dalam Belajar', '2023-08-10 16:35:04', '2023-08-10 16:35:04'),
+(20, 5, 2, 78, 'B', 'Baik dalam Belajar', 57, 'C', 'Cukup dalam Belajar', '2023-08-10 16:35:04', '2023-08-10 16:35:04'),
+(21, 5, 3, 87, 'A', 'Sangat Baik dalam Belajar', 89, 'A', 'Sangat Baik dalam Belajar', '2023-08-10 16:35:04', '2023-08-10 16:35:04'),
+(22, 5, 4, 99, 'A', 'Sangat Baik dalam Belajar', 99, 'A', 'Sangat Baik dalam Belajar', '2023-08-10 16:35:04', '2023-08-10 16:35:04'),
+(23, 5, 5, 81, 'B', 'Baik dalam Belajar', 44, 'D', 'Kurang dalam Belajar', '2023-08-10 16:35:04', '2023-08-10 16:35:04'),
+(24, 5, 6, 86, 'A', 'Sangat Baik dalam Belajar', 67, 'B', 'Baik dalam Belajar', '2023-08-10 16:35:04', '2023-08-10 16:35:04');
 
 -- --------------------------------------------------------
 
@@ -232,29 +245,29 @@ INSERT INTO `predikat` (`id_sistem`, `pred_a`, `pred_b`, `pred_c`, `pred_d`, `pr
 CREATE TABLE `raport` (
   `idraport` int NOT NULL,
   `idsiswa` int NOT NULL DEFAULT '0',
-  `semester` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `th_pelajaran` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `semester` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `th_pelajaran` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `sikap_spiritual` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `sikap_sosial` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `eskul1` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `deskripsi_eskul1` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `eskul2` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `deskripsi_eskul2` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `eskul3` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `deskripsi_eskul3` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `saran` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `tinggi_badan` tinyint DEFAULT NULL,
-  `berat_badan` tinyint DEFAULT NULL,
-  `pendengaran` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `penglihatan` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `gigi` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `prestasi1` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `ket_pres1` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `prestasi2` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `ket_pres2` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `sakit` tinyint DEFAULT NULL,
-  `izin` tinyint DEFAULT NULL,
-  `tanpa_ket` tinyint DEFAULT NULL,
+  `sikap_sosial` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `eskul1` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `deskripsi_eskul1` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `eskul2` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `deskripsi_eskul2` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `eskul3` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `deskripsi_eskul3` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `saran` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `tinggi_badan` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `berat_badan` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `pendengaran` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `penglihatan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `gigi` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `prestasi1` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `ket_pres1` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `prestasi2` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `ket_pres2` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `sakit` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `izin` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `tanpa_ket` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -265,9 +278,11 @@ CREATE TABLE `raport` (
 
 INSERT INTO `raport` (`idraport`, `idsiswa`, `semester`, `th_pelajaran`, `sikap_spiritual`, `sikap_sosial`, `eskul1`, `deskripsi_eskul1`, `eskul2`, `deskripsi_eskul2`, `eskul3`, `deskripsi_eskul3`, `saran`, `tinggi_badan`, `berat_badan`, `pendengaran`, `penglihatan`, `gigi`, `prestasi1`, `ket_pres1`, `prestasi2`, `ket_pres2`, `sakit`, `izin`, `tanpa_ket`, `updated_at`, `created_at`) VALUES
 (1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-08-09 03:55:31', '2023-08-09 03:55:31'),
-(2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-08-09 04:06:50', '2023-08-09 04:06:50'),
+(2, 2, '62', 'Quisquam ut qui corp', 'Vel blanditiis odit', 'Eiusmod eiusmod et e', 'Eum cillum saepe in', 'Dolorum consectetur', 'Dolorem minus eos de', 'Quae ducimus culpa', 'Quo voluptas distinc', 'Exercitationem ut ex', 'Elit labore delectu', '15', '76', 'Laboriosam maxime l', 'Eos quia illum ut', 'Animi et eligendi v', 'Est cum dolorem cons', 'Esse sed velit erro', 'Laboris sint harum r', 'Consectetur nesciunt', '9', '29', '13', '2023-08-10 17:02:54', '2023-08-09 04:06:50'),
 (3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-08-09 07:38:30', '2023-08-09 07:38:30'),
-(4, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-08-09 07:55:11', '2023-08-09 07:55:11');
+(4, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-08-09 07:55:11', '2023-08-09 07:55:11'),
+(5, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-08-10 15:33:35', '2023-08-10 15:33:35'),
+(6, 10, '27', 'Consequat Blanditii', 'Hic illum debitis s', 'Fugiat minim accusan', 'Vero deleniti do non', 'Ut ad nisi ut nisi c', 'Velit voluptates acc', 'Iste labore est volu', 'Et enim ratione sunt', 'Maiores omnis sint q', 'Hic vel mollitia dig', '74', '4124523', 'Beatae sapiente illo', 'Amet fugiat quia i', 'Enim enim dolorem pe', 'Qui possimus est co', 'Officia quia molliti', 'Voluptatem Est vero', 'Quam magni illo accu', '34', '97', '84', '2023-08-10 18:06:30', '2023-08-10 17:46:36');
 
 -- --------------------------------------------------------
 
@@ -310,8 +325,14 @@ CREATE TABLE `siswa` (
 
 INSERT INTO `siswa` (`idsiswa`, `idkelas`, `nama_siswa`, `no_induk`, `nis`, `tempat_lahir`, `tgl_lahir`, `jenis_kelamin`, `agama`, `anak_ke`, `alamat_siswa`, `nama_ayah`, `nama_ibu`, `pekerjaan_ayah`, `pekerjaan_ibu`, `jalan`, `kelurahan_desa`, `kecamatan_kota`, `kabupaten_kota`, `provinsi`, `nama_wali`, `pekerjaan_wali`, `alamat_wali`, `foto`, `updated_at`, `created_at`) VALUES
 (2, 7, 'Ahmad', '4126418', '1254124', 'Cirebon', '1987-04-21', 'L', 'Islam', 3, 'cirebon', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'none.jpg', '2023-08-09 04:06:50', '2023-08-09 04:06:50'),
-(3, 6, 'Salman Aulia', '234234', '78', 'Rerum Nam quia velit', '2005-12-10', 'L', 'Sed pariatur Dolore', 81, 'Veritatis veniam la', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'none.jpg', '2023-08-09 07:38:30', '2023-08-09 07:38:30'),
-(4, 6, 'Hilman Sky', '88', '95', 'Voluptatem accusanti', '1985-06-15', 'L', 'Non beatae optio re', 79, 'Error unde amet vol', 'Assumenda eaque cons', 'In fugiat vel eos q', 'Nulla magnam eligend', 'Adipisci aut sit si', 'Officia quia in ipsu', 'Quis eu unde labore', 'Sit ea minim except', 'Magna commodo quia e', 'Voluptatem obcaecati', 'Ullamco provident o', 'Ex adipisicing qui m', 'Corporis incidunt q', 'image_2023-08-09_145510139.png', '2023-08-09 08:10:01', '2023-08-09 07:55:11');
+(3, 6, 'Ahmad Mulyana', '42', '36', 'Inventore et aliquid', '1970-06-20', 'L', 'Consequat Molestias', 6, 'Pariatur Autem aute', 'Temporibus sed eum l', 'Vel assumenda do neq', 'Ullamco adipisicing', 'Ipsum explicabo Su', 'Qui dolorum voluptat', 'Pariatur Reprehende', 'Non nostrud ut vitae', 'Sunt rerum delectus', 'Minim earum iste ess', 'Ut ut qui unde delec', 'Occaecat facere aliq', 'Dolor ut cupiditate', 'none.jpg', '2023-08-10 07:43:41', '2023-08-09 07:38:30'),
+(4, 6, 'Hilman Sky', '88', '95', 'Voluptatem accusanti', '1985-06-15', 'L', 'Non beatae optio re', 79, 'Error unde amet vol', 'Assumenda eaque cons', 'In fugiat vel eos q', 'Nulla magnam eligend', 'Adipisci aut sit si', 'Officia quia in ipsu', 'Quis eu unde labore', 'Sit ea minim except', 'Magna commodo quia e', 'Voluptatem obcaecati', 'Ullamco provident o', 'Ex adipisicing qui m', 'Corporis incidunt q', 'image_2023-08-09_145510139.png', '2023-08-09 08:10:01', '2023-08-09 07:55:11'),
+(5, 13, 'Sahal', '19', '20210120016', 'Cillum aut dolore pr', '1986-10-24', 'L', 'Nisi aliquam provide', 92, 'Voluptatem eaque quo', 'Magna nisi commodi i', 'Dicta quos amet et', 'Autem tenetur at eve', 'Ea voluptate volupta', 'Aute et est soluta d', 'Officiis magnam dele', 'Laboriosam sint qui', 'Ex et id neque minu', 'Sed quaerat quae nul', 'Asperiores facilis e', 'Quisquam consequuntu', 'Beatae mollitia offi', 'WhatsApp Image 2023-08-10 at 11.19.53.jpg', '2023-08-10 15:31:39', '2023-08-10 15:31:39'),
+(6, 13, 'Sahal', '19', '20210120016', 'Cillum aut dolore pr', '1986-10-24', 'L', 'Nisi aliquam provide', 92, 'Voluptatem eaque quo', 'Magna nisi commodi i', 'Dicta quos amet et', 'Autem tenetur at eve', 'Ea voluptate volupta', 'Aute et est soluta d', 'Officiis magnam dele', 'Laboriosam sint qui', 'Ex et id neque minu', 'Sed quaerat quae nul', 'Asperiores facilis e', 'Quisquam consequuntu', 'Beatae mollitia offi', 'WhatsApp Image 2023-08-10 at 11.19.53.jpg', '2023-08-10 15:32:34', '2023-08-10 15:32:34'),
+(7, 15, 'Aliquip quam id nihi', '45', '1', 'Voluptatem commodi d', '1972-03-19', 'P', 'Aut sunt tempore s', 20, 'Et vel voluptatem er', 'Cum quidem quidem cu', 'Porro culpa ad vel n', 'Officia fuga Magnam', 'Esse aperiam non no', 'Asperiores molestiae', 'Aut dolorem dolores', 'Illum architecto ut', 'Sit sed qui ipsum e', 'Voluptate quo numqua', 'Id ullam illo conse', 'Rerum aut lorem culp', 'Enim magnam natus et', 'WhatsApp Image 2023-08-10 at 11.19.53.jpg', '2023-08-10 15:32:56', '2023-08-10 15:32:56'),
+(8, 15, 'Aliquip quam id nihi', '45', '1', 'Voluptatem commodi d', '1972-03-19', 'P', 'Aut sunt tempore s', 20, 'Et vel voluptatem er', 'Cum quidem quidem cu', 'Porro culpa ad vel n', 'Officia fuga Magnam', 'Esse aperiam non no', 'Asperiores molestiae', 'Aut dolorem dolores', 'Illum architecto ut', 'Sit sed qui ipsum e', 'Voluptate quo numqua', 'Id ullam illo conse', 'Rerum aut lorem culp', 'Enim magnam natus et', 'WhatsApp Image 2023-08-10 at 11.19.53.jpg', '2023-08-10 15:33:11', '2023-08-10 15:33:11'),
+(9, 15, 'Aliquip quam id nihi', '45', '1', 'Voluptatem commodi d', '1972-03-19', 'P', 'Aut sunt tempore s', 20, 'Et vel voluptatem er', 'Cum quidem quidem cu', 'Porro culpa ad vel n', 'Officia fuga Magnam', 'Esse aperiam non no', 'Asperiores molestiae', 'Aut dolorem dolores', 'Illum architecto ut', 'Sit sed qui ipsum e', 'Voluptate quo numqua', 'Id ullam illo conse', 'Rerum aut lorem culp', 'Enim magnam natus et', 'WhatsApp Image 2023-08-10 at 11.19.53.jpg', '2023-08-10 15:33:35', '2023-08-10 15:33:35'),
+(10, 16, 'Nashiruddin Sahal', '25', '12345', 'Quaerat rem possimus', '1974-02-11', 'P', 'Quis maxime veniam', 57, 'Fugit mollit conseq', 'Enim placeat dolor', 'Pariatur Beatae rei', 'Est ut dignissimos q', 'Enim illo suscipit v', 'Eos expedita odit i', 'Alias ratione possim', 'Maxime minim minus i', 'Illum aliqua Non v', 'Et ut accusamus et i', 'Deleniti optio vel', 'Temporibus esse nemo', 'Nostrud deserunt qui', 'WhatsApp Image 2023-08-10 at 11.19.53.jpg', '2023-08-10 17:46:36', '2023-08-10 17:46:36');
 
 -- --------------------------------------------------------
 
@@ -338,7 +359,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `role`, `id_join`, `created_at`, `updated_at`) VALUES
 (5, 'Super Admin', 'admin@mail.com', NULL, '$2y$10$YJs/U2aBZRbapIWxC2.iC.5zCQactf7D.aCk8kYR/woJidvXYE3b2', NULL, 1, 0, '2023-08-08 02:33:20', '2023-08-08 02:33:20'),
-(6, 'Walas', 'walas@mail.com', NULL, '$2y$10$YJs/U2aBZRbapIWxC2.iC.5zCQactf7D.aCk8kYR/woJidvXYE3b2', NULL, 2, 3, '2023-08-08 02:33:20', '2023-08-08 02:33:20');
+(6, 'Sri Ningtyas', 'walas@mail.com', NULL, '$2y$10$nhuUYmnMYpd.YBKdnVZ.cORCeGxV/WrmHx8pIaoJ//5TJaqbgYqEa', NULL, 2, 7, '2023-08-08 02:33:20', '2023-08-08 02:33:20'),
+(10, 'Nashiruddin Sahal', '12345@stambuk.com', NULL, '$2y$10$9w.08Q1TUuvWTa6CbPoCbes9MMIbYEdkj4dkTdXrlmpXtkuW7Zk96', NULL, 0, 10, '2023-08-10 10:46:36', '2023-08-10 10:46:36');
 
 -- --------------------------------------------------------
 
@@ -495,7 +517,7 @@ ALTER TABLE `kriteria_nilai`
 -- AUTO_INCREMENT for table `mapel`
 --
 ALTER TABLE `mapel`
-  MODIFY `idmapel` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idmapel` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -507,7 +529,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `nilai`
 --
 ALTER TABLE `nilai`
-  MODIFY `idnilai` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idnilai` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -525,19 +547,19 @@ ALTER TABLE `predikat`
 -- AUTO_INCREMENT for table `raport`
 --
 ALTER TABLE `raport`
-  MODIFY `idraport` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idraport` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `idsiswa` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idsiswa` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `wali_kelas`

@@ -24,7 +24,11 @@ class AuthController extends Controller
         // dd($credential);
         if (Auth::attempt($credential)) {
             $request->session()->regenerate();
-            return redirect()->intended('admin');
+            if (auth()->user()->role == 0) {
+                return redirect()->intended('mysiswa');
+            } else {
+                return redirect()->intended('admin');
+            }
         }
         return back()->with('loginError', 'Login Failed');
     }

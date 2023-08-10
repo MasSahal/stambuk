@@ -7,6 +7,9 @@ use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\MapelController;
+use App\Http\Controllers\MySiswaController;
+use App\Http\Controllers\RaportController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WalasController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,9 +29,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('', function () {
-    redirect('/login');
-});
+Route::get('', [AppController::class, 'login']);
 
 Route::get('/logout', [AppController::class, 'logout'])->name('logout');
 Route::get('/login', [AppController::class, 'login'])->name('login');
@@ -47,10 +48,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('k_nilai', K_NilaiController::class);
     Route::resource('walas', WalasController::class);
     Route::resource('mapel', MapelController::class);
+    Route::resource('pengguna', UserController::class);
+    Route::resource('raport', RaportController::class);
 
 
     Route::get('/input-nilai', [AppController::class, 'input_nilai']);
-    Route::get('/user', 'UserController@index');
+    // Route::get('/user', 'UserController@index');
 });
 
 
@@ -60,6 +63,7 @@ Route::group(['prefix' => 'ajax'], function () {
 });
 
 Route::group(['prefix' => 'mysiswa', 'middleware' => 'auth'], function () {
-
     Route::get('index', [MySiswaController::class, 'index']);
 });
+
+Route::resource('mysiswa', MySiswaController::class);

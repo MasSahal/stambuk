@@ -71,6 +71,10 @@
                                                     href="{{ route('siswa.edit', $r->idsiswa) }}" role="button">
                                                     Edit
                                                 </a>
+                                                <a name="" id="" class="btn btn-sm btn-primary"
+                                                    href="{{ route('raport.edit', $r->idsiswa) }}" role="button">
+                                                    Perbarui Raport
+                                                </a>
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit"

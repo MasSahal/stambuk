@@ -31,68 +31,70 @@
                         @csrf
                         @method('PUT')
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="nama">Nama </label>
-                                <input type="text" name="nama" id="nama"
-                                    class="form-control"value="{{ $record->nama }}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="nama">Nama </label>
+                                    <input type="text" name="nama" id="nama"
+                                        class="form-control"value="{{ $record->nama }}">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="no_induk">NIP</label>
-                                <input type="number" name="nip" id="nip"
-                                    class="form-control"value="{{ $record->no_induk }}">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="no_induk">NIP</label>
+                                    <input type="number" name="nip" id="nip"
+                                        class="form-control"value="{{ $record->nip }}">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="tempat_lahir">Tempat Lahir</label>
-                                <input type="text" name="tempat_lahir" id="tempat_lahir"
-                                    class="form-control"value="{{ $record->tempat_lahir }}">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="tempat_lahir">Tempat Lahir</label>
+                                    <input type="text" name="tempat_lahir" id="tempat_lahir"
+                                        class="form-control"value="{{ $record->tempat_lahir }}">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="tgl_lahir">Tanggal Lahir</label>
-                                <input type="date" name="tanggal_lahir" id="tanggal_lahir"
-                                    class="form-control"value="{{ $record->tanggal_lahir }}">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="tgl_lahir">Tanggal Lahir</label>
+                                    <input type="date" name="tanggal_lahir" id="tanggal_lahir"
+                                        class="form-control"value="{{ $record->tanggal_lahir }}">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="jenis_kelamin">Jenis Kelamin</label>
-                                <input type="text" name="jenis_kelamin" id="jenis_kelamin"
-                                    class="form-control"value="{{ $record->jenis_kelamin }}">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="jenis_kelamin">Jenis Kelamin</label>
+                                    <input type="text" name="jenis_kelamin" id="jenis_kelamin"
+                                        class="form-control"value="{{ $record->jenis_kelamin }}">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="agama">Agama</label>
-                                <input type="text" name="agama" id="agama"
-                                    class="form-control"value="{{ $record->agama }}">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="agama">Agama</label>
+                                    <input type="text" name="agama" id="agama"
+                                        class="form-control"value="{{ $record->agama }}">
+                                </div>
                             </div>
-                        </div>
 
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="alamat_siswa">Alamat</label>
-                                <input type="text" name="alamat" id="alamat"
-                                    class="form-control"value="{{ $record->alamat }}">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="alamat_siswa">Alamat</label>
+                                    <input type="text" name="alamat" id="alamat"
+                                        class="form-control"value="{{ $record->alamat }}">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="nama_ortu">Email</label>
-                                <input type="text" name="email" id="email"
-                                    class="form-control"value="{{ $record->email }}">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="nama_ortu">Email</label>
+                                    <input type="text" name="email" id="email"
+                                        class="form-control"value="{{ $record->email }}">
+                                </div>
                             </div>
                         </div>
                         <hr>

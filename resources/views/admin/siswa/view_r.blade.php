@@ -238,7 +238,7 @@
                                 </tr>
                                 <tr>
                                     <td>3</td>
-                                    <td>Pendengaran</td>
+                                    <td>Gigi</td>
                                     <td>{{ $raport->gigi ?? '--' }}</td>
                                 </tr>
                             </table>

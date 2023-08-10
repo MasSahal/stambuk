@@ -41,15 +41,6 @@ class NilaiController extends Controller
      */
     public function create(Request $request)
     {
-        // $id = $request->get('id') ?? 0;
-        // $idmapel = $request->get('idmapel') ?? 0;
-        // $siswa = DB::table('siswa')->where('idsiswa', '=', $id)->first();
-        // return view('admin.nilai.create', [
-        //     'title' => "Tambah Siswa | STAMBUK",
-        //     'nilai' => Nilai::all(),
-        //     'siswa' => $siswa,
-        //     'idmapel' => $idmapel
-        // ]);
         $id = $request->get('idsiswa') ?? 0;
         $siswa = DB::table('siswa')->where('idsiswa', '=', $id)->first();
         $mapel = Mapel::all();
@@ -107,9 +98,11 @@ class NilaiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Nilai $nilai)
+    public function edit($id)
     {
-        return view("admin.nilai.view", ['record' => $nilai]);
+        $record = DB::table('siswa')->join('kelas', 'siswa.idkelas', '=', 'kelas.idkelas')->where('siswa.idsiswa', '=', $id)->first();
+        $nilai = DB::table('nilai')->join('mapel', 'nilai.id_mapel', '=', 'mapel.idmapel')->where('nilai.idsiswa', '=', $id)->get();
+        return view('admin.nilai.edit', compact('record', 'nilai'));
     }
 
     /**

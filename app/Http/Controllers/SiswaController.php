@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kelas;
 use App\Models\Raport;
 use App\Models\Siswa;
+use App\Models\User;
 use App\Models\Walas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -78,6 +79,15 @@ class SiswaController extends Controller
         ]);
 
         $insert = Siswa::Create($request->all());
+
+        //add akun siswa otomatis
+        User::Create([
+            'name' => $request->nama_siswa,
+            'email' => $request->nis . '@stambuk.com',
+            'password' => bcrypt($request->nis),
+            'role' => 0,
+            'id_join' => $insert->idsiswa,
+        ]);
 
         //add blank raport
         Raport::Create([

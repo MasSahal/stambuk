@@ -41,9 +41,12 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="type">Type</label>
-                                <input type="text" name="type" id="type"
-                                    class="form-control"value="{{ $record->type }}">
+                                <label for="type">Jenis Mata Pelajaran:</label>
+                                <select class="form-control" id="type" name="type">
+                                    <option value="utama" {{ $record->type == 'utama' ? 'selected' : '' }}>Utama</option>
+                                    <option value="mulok" {{ $record->type == 'mulok' ? 'selected' : '' }}>Muatan Lokal
+                                        (Mulok)</option>
+                                </select>
                             </div>
                         </div>
 

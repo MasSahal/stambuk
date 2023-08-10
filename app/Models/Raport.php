@@ -13,8 +13,6 @@ class Raport extends Model
     protected $primaryKey = "idraport";
     protected $fillable = array(
         'idsiswa',
-        'nama_siswa',
-        'nisn',
         'nama_sekolah',
         'alamat_sekolah',
         'kelas',

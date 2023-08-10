@@ -250,7 +250,6 @@
                                 <small class="text-danger">{{ $errors->first('email') }}
                                 </small>
                             @endif
-
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1" class="text-uppercase">Password</label>

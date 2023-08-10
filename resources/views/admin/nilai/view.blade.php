@@ -78,7 +78,7 @@
                                 </table>
                             </div>
                         </div>
-                        <a href="{{ route('mapel.index') }}" class="btn btn-secondary">Kembali</a>
+                        <a href="{{ route('nilai.index') }}" class="btn btn-secondary">Kembali</a>
                     </div>
                 </div>
             </div>

@@ -18,18 +18,16 @@
                 </div>
             </a>
         </li>
-        <li class="pt-2 pb-1">
-            <span class="nav-item-head">Main</span>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('dashboard') }}">
-                <i class="mdi mdi-compass-outline menu-icon"></i>
-                <span class="menu-title">Dashboard</span>
-            </a>
-        </li>
-
-
         @if (auth()->user()->role == 1)
+            <li class="pt-2 pb-1">
+                <span class="nav-item-head">Main</span>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('dashboard') }}">
+                    <i class="mdi mdi-compass-outline menu-icon"></i>
+                    <span class="menu-title">Dashboard</span>
+                </a>
+            </li>
             <li class="pt-2 pb-1">
                 <span class="nav-item-head">Kelola Data</span>
             </li>
@@ -58,6 +56,7 @@
                     <span class="menu-title">Daftar Wali Kelas</span>
                 </a>
             </li>
+
             <li class="pt-2 pb-1">
                 <span class="nav-item-head">Kelola Data</span>
             </li>
@@ -79,9 +78,24 @@
                     </ul>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('pengguna.index') }}">
+                    <i class="mdi mdi-account-group menu-icon"></i>
+                    <span class="menu-title">Data Pengguna</span>
+                </a>
+            </li>
         @endif
 
         @if (auth()->user()->role == 2)
+            <li class="pt-2 pb-1">
+                <span class="nav-item-head">Main</span>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('dashboard') }}">
+                    <i class="mdi mdi-compass-outline menu-icon"></i>
+                    <span class="menu-title">Dashboard</span>
+                </a>
+            </li>
             <li class="pt-2 pb-1">
                 <span class="nav-item-head">Kelola Data</span>
             </li>
@@ -108,6 +122,50 @@
                     <i class="mdi mdi-school menu-icon"></i>
                     <span class="menu-title">Data Siswa</span>
                 </a>
+
+            </li>
+        @endif
+
+        @if (auth()->user()->role == 0)
+            <li class="pt-2 pb-1">
+                <span class="nav-item-head">Main</span>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('mysiswa.index') . '?mod=' }}">
+                    <i class="mdi mdi-compass-outline menu-icon"></i>
+                    <span class="menu-title">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('mysiswa.index') . '?mod=nilai' }}">
+                    <i class="mdi mdi-database menu-icon"></i>
+                    <span class="menu-title">Lihat Nilai</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('mysiswa.index') . '?mod=raport' }}">
+                    <i class="mdi mdi-book menu-icon"></i>
+                    <span class="menu-title">Raport</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#nilai" aria-expanded="false"
+                    aria-controls="nilai">
+                    <i class="mdi mdi-school menu-icon"></i>
+                    <span class="menu-title">Data Profile</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="nilai">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('mysiswa.index') . '?mod=profile' }}">Lihat Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('mysiswa.edit', auth()->user()->id) }}">Edit Profile
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
         @endif
     </ul>

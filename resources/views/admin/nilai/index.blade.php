@@ -38,6 +38,10 @@
                                                     href="{{ route('nilai.show', $r->idsiswa) }}" role="button">
                                                     Lihat Nilai
                                                 </a>
+                                                <a name="" id="" class="btn btn-sm btn-warning"
+                                                    href="{{ route('nilai.edit', $r->idsiswa) }}" role="button">
+                                                    Edit Nilai
+                                                </a>
                                             @else
                                                 <a name="" id="" class="btn btn-sm btn-info"
                                                     href="{{ route('nilai.create', 'idsiswa=' . $r->idsiswa) }}"
