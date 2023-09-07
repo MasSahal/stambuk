@@ -68,7 +68,7 @@ class MySiswaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return redirect()->to(route('mysiswa.index', ['mod' => 'raport']));
     }
 
     /**
@@ -77,6 +77,7 @@ class MySiswaController extends Controller
     public function edit(string $id)
     {
         $record = DB::table('siswa')->where('idsiswa', '=', $id)->first();
+        // dd($record);
         return view('mysiswa.edit', compact('record'));
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GuruMapel;
 use App\Models\User;
 use App\Models\Walas;
 use Illuminate\Http\Request;
@@ -23,14 +24,28 @@ class UserController extends Controller
     public function create(Request $request)
     {
         $type = $request->type ?? 1;
+        $arr_used = DB::table('users')
+            ->where('role', $type)
+            ->pluck('id_join')
+            ->toArray();
+
         if ($type == 2) {
-            $walas = Walas::all();
-            $title = "Tambah Wali Kelas";
+            $record = DB::table('wali_kelas')
+                ->whereNotIn('idwali_kelas', $arr_used)
+                ->get();
+            $title = "Tambah Akun Wali Kelas";
+            #
+        } elseif ($type == 3) {
+            $record = DB::table('guru_mapel')
+                ->whereNotIn('id_gurumapel', $arr_used)
+                ->get();
+
+            $title = "Tambah Akun Guru Mata Pelajaran";
         } else {
-            $walas = false;
-            $title = "Tambah Admin";
+            $record = [];
+            $title = "Tambah Akun Admin";
         }
-        return view('admin.pengguna.create', ['record' => $walas, 'title' => $title]);
+        return view('admin.pengguna.create', ['record' => $record, 'title' => $title, 'type' => $type]);
     }
 
     /**
@@ -48,6 +63,9 @@ class UserController extends Controller
         if ($request->role == 2) {
             $walas = Walas::findOrFail($request->id_join);
             $nama = $walas->nama;
+        } elseif ($request->role == 3) {
+            $guru_mapel = GuruMapel::findOrFail($request->id_join);
+            $nama = $guru_mapel->nama_guru;
         } else {
             $request->validate([
                 'name' => 'required',
@@ -87,13 +105,13 @@ class UserController extends Controller
         $record = User::findOrFail($id);
         $type = $request->type ?? 1;
         if ($type == 2) {
-            $walas = Walas::all();
-            $title = "Tambah Wali Kelas";
+            $title = "Edit Wali Kelas";
+        } elseif ($type == 3) {
+            $title = "Edit Guru Mapel";
         } else {
-            $walas = false;
-            $title = "Tambah Admin";
+            $title = "Edit Admin";
         }
-        return view('admin.pengguna.edit', ['walas' => $walas, 'title' => $title, 'record' => $record]);
+        return view('admin.pengguna.edit', ['title' => $title, 'record' => $record]);
     }
 
     /**
@@ -102,21 +120,11 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'name' => 'required',
             'email' => 'required',
-            'role' => 'required',
         ]);
 
-        if ($request->role == 2) {
-            $walas = Walas::findOrFail($request->id_join);
-            $data['name'] = $walas->nama;
-            $data['id_join'] = $walas->idwali_kelas;
-        } else {
-            $request->validate([
-                'name' => 'required',
-            ]);
-            $data['name'] = $request->name;
-        }
-
+        $data['name'] = $request->name;
         $data['email'] = $request->email;
 
         if ($request->has('password')) {
@@ -125,7 +133,7 @@ class UserController extends Controller
 
         $update = DB::table('users')->where('id', $id)->update($data);
         if ($update) {
-            return redirect()->route("pengguna.index")->with("success", "Data Pengguna $request->nama berhasil diperbarui!");
+            return redirect()->route("pengguna.index")->with("success", "Data Pengguna $request->name berhasil diperbarui!");
         } else {
             return back()->withErrors('Gagal memperbarui data Pengguna!');
         }
@@ -141,6 +149,47 @@ class UserController extends Controller
             return redirect()->route("pengguna.index")->with("success", "Data pengguna berhasil dihapus!");
         } else {
             return back()->with("errors", 'Gagal menghapus data pengguna!');
+        }
+    }
+
+    public function edit_profile()
+    {
+        $record = User::findOrFail(auth()->user()->id);
+        return view('admin.edit_profile', ['record' => $record, 'title' => "Edit Profile"]);
+    }
+
+    public function simpan_profile(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+
+        // upload foto
+        if ($request->hasFile('foto')) {
+            $image = $request->file('foto');
+            $name = time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/profile');
+            $image->move($destinationPath, $name);
+            $data['foto'] = $name;
+        }
+
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+
+        if ($request->has('password')) {
+            $data['password'] = bcrypt($request->password);
+        }
+
+        // dd($data);
+
+        $update = DB::table('users')->where('id', auth()->user()->id)->update($data);
+        if ($update) {
+            return redirect()->route("dashboard")->with("success", "Data Profile $request->name berhasil diperbarui!");
+        } else {
+            return back()->withErrors('Gagal memperbarui data Profile!');
         }
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 10, 2023 at 06:52 PM
+-- Generation Time: Sep 06, 2023 at 06:57 AM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.32
 
@@ -36,6 +36,53 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guru_mapel`
+--
+
+CREATE TABLE `guru_mapel` (
+  `id_gurumapel` int NOT NULL,
+  `idmapel` int NOT NULL,
+  `nip` varchar(20) NOT NULL,
+  `nama_guru` varchar(100) NOT NULL,
+  `jenis_kelamin` varchar(20) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `guru_mapel`
+--
+
+INSERT INTO `guru_mapel` (`id_gurumapel`, `idmapel`, `nip`, `nama_guru`, `jenis_kelamin`, `created_at`, `updated_at`) VALUES
+(2, 6, '94', 'Bu Tuti S.pd.i', 'P', '2023-09-03 03:11:48', '2023-09-03 03:31:50'),
+(4, 2, '345678', 'vgfghf', 'P', '2023-09-03 05:20:31', '2023-09-03 05:20:31'),
+(5, 5, '12', 'Officia a aliquam mo', 'P', '2023-09-06 04:49:08', '2023-09-06 04:49:08');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `history_nilai`
+--
+
+CREATE TABLE `history_nilai` (
+  `id_history` int NOT NULL,
+  `id_siswa` int NOT NULL,
+  `kelas_sebelumnya` varchar(10) NOT NULL,
+  `ta_sebelumnya` varchar(20) NOT NULL,
+  `mapel_sebelumnya` varchar(50) NOT NULL,
+  `p_nilai_old` int NOT NULL,
+  `p_predikat_old` varchar(10) NOT NULL,
+  `p_deskripsi_old` text NOT NULL,
+  `k_nilai_old` int NOT NULL,
+  `k_predikat_old` varchar(10) NOT NULL,
+  `k_deskripsi_old` text NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -82,6 +129,17 @@ CREATE TABLE `kriteria_nilai` (
   `updated_at` datetime DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `kriteria_nilai`
+--
+
+INSERT INTO `kriteria_nilai` (`idkriteria`, `idmapel`, `kriteria`, `updated_at`, `created_at`) VALUES
+(3, 2, 'mampu membaca 2', '2023-08-11 12:03:07', '2023-08-11 05:03:07'),
+(4, 2, 'mampu menulis 1', '2023-08-11 12:03:21', '2023-08-11 05:03:21'),
+(6, 2, '{nama} mampu membaca dengan baik', '2023-09-05 13:26:42', '2023-09-05 06:26:42'),
+(7, 1, '{nama} {predikat} menulis, membaca, dan mendengar', '2023-09-05 13:44:16', '2023-09-05 06:44:16'),
+(8, 1, '{nama} {predikat} mengeksplor lingkungan sekitar rumah tempat tinggal', '2023-09-05 13:59:00', '2023-09-05 06:59:00');
 
 -- --------------------------------------------------------
 
@@ -141,14 +199,15 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `nilai` (
   `idnilai` int NOT NULL,
+  `id_transkrip` int NOT NULL,
   `idsiswa` int NOT NULL,
   `id_mapel` int NOT NULL,
   `p_nilai` int NOT NULL,
   `p_predikat` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `p_deskripsi` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `p_deskripsi` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `k_nilai` int NOT NULL,
   `k_predikat` varchar(100) NOT NULL,
-  `k_deskripsi` varchar(100) NOT NULL,
+  `k_deskripsi` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `updated_at` datetime NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -157,31 +216,91 @@ CREATE TABLE `nilai` (
 -- Dumping data for table `nilai`
 --
 
-INSERT INTO `nilai` (`idnilai`, `idsiswa`, `id_mapel`, `p_nilai`, `p_predikat`, `p_deskripsi`, `k_nilai`, `k_predikat`, `k_deskripsi`, `updated_at`, `created_at`) VALUES
-(1, 2, 1, 90, 'A', 'Sangat Baik dalam Belajar', 89, 'A', 'Sangat Baik dalam Belajar', '2023-08-09 19:42:57', '2023-08-09 19:42:57'),
-(2, 2, 2, 44, 'D', 'Kurang dalam Belajar', 8, 'E', 'Sangat Kurang dalam Belajar', '2023-08-09 19:42:57', '2023-08-09 19:42:57'),
-(3, 2, 3, 91, 'A', 'Sangat Baik dalam Belajar', 71, 'B', 'Baik dalam Belajar', '2023-08-09 19:42:57', '2023-08-09 19:42:57'),
-(4, 2, 4, 58, 'C', 'Cukup dalam Belajar', 7, 'E', 'Sangat Kurang dalam Belajar', '2023-08-09 19:42:57', '2023-08-09 19:42:57'),
-(5, 2, 5, 44, 'D', 'Kurang dalam Belajar', 75, 'B', 'Baik dalam Belajar', '2023-08-09 19:42:57', '2023-08-09 19:42:57'),
-(6, 2, 6, 56, 'C', 'Cukup dalam Belajar', 11, 'E', 'Sangat Kurang dalam Belajar', '2023-08-09 19:42:57', '2023-08-09 19:42:57'),
-(7, 3, 1, 57, 'C', 'Cukup dalam Belajar', 53, 'C', 'Cukup dalam Belajar', '2023-08-09 20:10:14', '2023-08-09 20:10:14'),
-(8, 3, 2, 89, 'A', 'Sangat Baik dalam Belajar', 91, 'A', 'Sangat Baik dalam Belajar', '2023-08-09 20:10:14', '2023-08-09 20:10:14'),
-(9, 3, 3, 45, 'D', 'Kurang dalam Belajar', 11, 'E', 'Sangat Kurang dalam Belajar', '2023-08-09 20:10:14', '2023-08-09 20:10:14'),
-(10, 3, 4, 61, 'C', 'Cukup dalam Belajar', 42, 'D', 'Kurang dalam Belajar', '2023-08-09 20:10:14', '2023-08-09 20:10:14'),
-(11, 3, 5, 79, 'B', 'Baik dalam Belajar', 10, 'E', 'Sangat Kurang dalam Belajar', '2023-08-09 20:10:14', '2023-08-09 20:10:14'),
-(12, 3, 6, 98, 'A', 'Sangat Baik dalam Belajar', 21, 'E', 'Sangat Kurang dalam Belajar', '2023-08-09 20:10:14', '2023-08-09 20:10:14'),
-(13, 4, 1, 52, 'C', 'Cukup dalam Belajar', 89, 'A', 'Sangat Baik dalam Belajar', '2023-08-10 07:53:26', '2023-08-10 07:53:26'),
-(14, 4, 2, 44, 'D', 'Kurang dalam Belajar', 90, 'A', 'Sangat Baik dalam Belajar', '2023-08-10 07:53:26', '2023-08-10 07:53:26'),
-(15, 4, 3, 54, 'C', 'Cukup dalam Belajar', 44, 'D', 'Kurang dalam Belajar', '2023-08-10 07:53:26', '2023-08-10 07:53:26'),
-(16, 4, 4, 72, 'B', 'Baik dalam Belajar', 22, 'E', 'Sangat Kurang dalam Belajar', '2023-08-10 07:53:27', '2023-08-10 07:53:27'),
-(17, 4, 5, 47, 'D', 'Kurang dalam Belajar', 50, 'C', 'Cukup dalam Belajar', '2023-08-10 07:53:27', '2023-08-10 07:53:27'),
-(18, 4, 6, 99, 'A', 'Sangat Baik dalam Belajar', 75, 'B', 'Baik dalam Belajar', '2023-08-10 07:53:27', '2023-08-10 07:53:27'),
-(19, 5, 1, 42, 'D', 'Kurang dalam Belajar', 52, 'C', 'Cukup dalam Belajar', '2023-08-10 16:35:04', '2023-08-10 16:35:04'),
-(20, 5, 2, 78, 'B', 'Baik dalam Belajar', 57, 'C', 'Cukup dalam Belajar', '2023-08-10 16:35:04', '2023-08-10 16:35:04'),
-(21, 5, 3, 87, 'A', 'Sangat Baik dalam Belajar', 89, 'A', 'Sangat Baik dalam Belajar', '2023-08-10 16:35:04', '2023-08-10 16:35:04'),
-(22, 5, 4, 99, 'A', 'Sangat Baik dalam Belajar', 99, 'A', 'Sangat Baik dalam Belajar', '2023-08-10 16:35:04', '2023-08-10 16:35:04'),
-(23, 5, 5, 81, 'B', 'Baik dalam Belajar', 44, 'D', 'Kurang dalam Belajar', '2023-08-10 16:35:04', '2023-08-10 16:35:04'),
-(24, 5, 6, 86, 'A', 'Sangat Baik dalam Belajar', 67, 'B', 'Baik dalam Belajar', '2023-08-10 16:35:04', '2023-08-10 16:35:04');
+INSERT INTO `nilai` (`idnilai`, `id_transkrip`, `idsiswa`, `id_mapel`, `p_nilai`, `p_predikat`, `p_deskripsi`, `k_nilai`, `k_predikat`, `k_deskripsi`, `updated_at`, `created_at`) VALUES
+(27, 2, 2, 1, 9, 'E', '<p>Kang yayan sangat kurang dalam menulis, membaca, dan mendengar. Kang yayan sangat kurang dalam mengeksplor lingkungan sekitar rumah tempat tinggal.</p> ', 26, 'E', 'Kang yayan sangat kurang dalam menulis, membaca, dan mendengar. |Kang yayan sangat kurang dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-05 13:59:49', '2023-09-05 13:59:49'),
+(28, 2, 2, 4, 53, 'C', '', 64, 'C', '', '2023-09-05 13:59:49', '2023-09-05 13:59:49'),
+(29, 2, 2, 5, 7, 'E', '', 78, 'B', '', '2023-09-05 13:59:49', '2023-09-05 13:59:49'),
+(30, 2, 2, 7, 79, 'B', '', 53, 'C', '', '2023-09-05 13:59:49', '2023-09-05 13:59:49'),
+(31, 1, 1, 1, 48, 'D', 'Sunt qui blanditiis kurang dalam  menulis, membaca, dan mendengar. Sunt qui blanditiis kurang dalam  mengeksplor lingkungan sekitar rumah tempat tinggal. ', 14, 'E', 'Sunt qui blanditiis sangat kurang dalam menulis, membaca, dan mendengar. Sunt qui blanditiis sangat kurang dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-05 23:38:49', '2023-09-05 23:38:49'),
+(32, 1, 1, 4, 85, 'A', '', 11, 'E', '', '2023-09-05 23:38:49', '2023-09-05 23:38:49'),
+(33, 1, 1, 5, 78, 'B', '', 38, 'D', '', '2023-09-05 23:38:49', '2023-09-05 23:38:49'),
+(34, 1, 1, 7, 1, 'E', '', 43, 'D', '', '2023-09-05 23:38:49', '2023-09-05 23:38:49'),
+(35, 4, 4, 1, 89, 'A', 'Voluptate et atque s sangat baik dalam menulis, membaca, dan mendengar. Voluptate et atque s sangat baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', 66, 'B', 'Voluptate et atque s baik dalam menulis, membaca, dan mendengar. Voluptate et atque s baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-05 23:43:39', '2023-09-05 23:43:39'),
+(36, 4, 4, 4, 47, 'D', '', 13, 'E', '', '2023-09-05 23:43:39', '2023-09-05 23:43:39'),
+(37, 4, 4, 5, 81, 'B', '', 22, 'E', '', '2023-09-05 23:43:39', '2023-09-05 23:43:39'),
+(38, 4, 4, 7, 97, 'A', '', 90, 'A', '', '2023-09-05 23:43:39', '2023-09-05 23:43:39'),
+(39, 7, 3, 1, 51, 'C', 'Quo in consectetur cukup dalam menulis, membaca, dan mendengar. Quo in consectetur cukup dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', 14, 'E', 'Quo in consectetur sangat kurang dalam menulis, membaca, dan mendengar. Quo in consectetur sangat kurang dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-05 23:47:46', '2023-09-05 23:47:46'),
+(40, 7, 3, 4, 16, 'E', '', 34, 'D', '', '2023-09-05 23:47:46', '2023-09-05 23:47:46'),
+(41, 7, 3, 5, 74, 'B', '', 10, 'E', '', '2023-09-05 23:47:46', '2023-09-05 23:47:46'),
+(42, 7, 3, 7, 18, 'E', '', 7, 'E', '', '2023-09-05 23:47:46', '2023-09-05 23:47:46'),
+(43, 11, 3, 1, 95, 'A', 'Quo in consectetur sangat baik dalam menulis, membaca, dan mendengar. Quo in consectetur sangat baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', 63, 'C', 'Quo in consectetur cukup dalam menulis, membaca, dan mendengar. Quo in consectetur cukup dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-06 03:07:19', '2023-09-06 03:07:19'),
+(44, 11, 3, 4, 57, 'C', '', 42, 'D', '', '2023-09-06 03:07:19', '2023-09-06 03:07:19'),
+(45, 11, 3, 5, 48, 'D', '', 46, 'D', '', '2023-09-06 03:07:19', '2023-09-06 03:07:19'),
+(46, 11, 3, 7, 50, 'C', '', 4, 'E', '', '2023-09-06 03:07:19', '2023-09-06 03:07:19'),
+(47, 12, 4, 1, 11, 'E', 'Voluptate et atque s sangat kurang dalam menulis, membaca, dan mendengar. Voluptate et atque s sangat kurang dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', 74, 'B', 'Voluptate et atque s baik dalam menulis, membaca, dan mendengar. Voluptate et atque s baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-06 03:07:27', '2023-09-06 03:07:27'),
+(48, 12, 4, 4, 40, 'D', '', 93, 'A', '', '2023-09-06 03:07:27', '2023-09-06 03:07:27'),
+(49, 12, 4, 5, 45, 'D', '', 33, 'D', '', '2023-09-06 03:07:27', '2023-09-06 03:07:27'),
+(50, 12, 4, 7, 69, 'B', '', 50, 'C', '', '2023-09-06 03:07:27', '2023-09-06 03:07:27'),
+(51, 10, 2, 1, 44, 'D', 'Kang yayan kurang dalam  menulis, membaca, dan mendengar. Kang yayan kurang dalam  mengeksplor lingkungan sekitar rumah tempat tinggal. ', 77, 'B', 'Kang yayan baik dalam menulis, membaca, dan mendengar. Kang yayan baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-06 03:07:36', '2023-09-06 03:07:36'),
+(52, 10, 2, 4, 36, 'D', '', 60, 'C', '', '2023-09-06 03:07:36', '2023-09-06 03:07:36'),
+(53, 10, 2, 5, 86, 'A', '', 42, 'D', '', '2023-09-06 03:07:36', '2023-09-06 03:07:36'),
+(54, 10, 2, 7, 80, 'B', '', 97, 'A', '', '2023-09-06 03:07:36', '2023-09-06 03:07:36'),
+(55, 9, 1, 1, 95, 'A', 'Sunt qui blanditiis sangat baik dalam menulis, membaca, dan mendengar. Sunt qui blanditiis sangat baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', 81, 'B', 'Sunt qui blanditiis baik dalam menulis, membaca, dan mendengar. Sunt qui blanditiis baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-06 03:07:43', '2023-09-06 03:07:43'),
+(56, 9, 1, 4, 19, 'E', '', 11, 'E', '', '2023-09-06 03:07:43', '2023-09-06 03:07:43'),
+(57, 9, 1, 5, 4, 'E', '', 69, 'B', '', '2023-09-06 03:07:43', '2023-09-06 03:07:43'),
+(58, 9, 1, 7, 75, 'B', '', 48, 'D', '', '2023-09-06 03:07:43', '2023-09-06 03:07:43'),
+(59, 13, 1, 1, 2, 'E', 'Sunt qui blanditiis sangat kurang dalam menulis, membaca, dan mendengar. Sunt qui blanditiis sangat kurang dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', 71, 'B', 'Sunt qui blanditiis baik dalam menulis, membaca, dan mendengar. Sunt qui blanditiis baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-06 03:58:09', '2023-09-06 03:58:09'),
+(60, 13, 1, 4, 31, 'D', '', 85, 'A', '', '2023-09-06 03:58:09', '2023-09-06 03:58:09'),
+(61, 13, 1, 5, 53, 'C', '', 26, 'E', '', '2023-09-06 03:58:09', '2023-09-06 03:58:09'),
+(62, 13, 1, 7, 73, 'B', '', 73, 'B', '', '2023-09-06 03:58:09', '2023-09-06 03:58:09'),
+(63, 14, 2, 1, 32, 'D', 'Kang yayan kurang dalam  menulis, membaca, dan mendengar. Kang yayan kurang dalam  mengeksplor lingkungan sekitar rumah tempat tinggal. ', 11, 'E', 'Kang yayan sangat kurang dalam menulis, membaca, dan mendengar. Kang yayan sangat kurang dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-06 03:58:33', '2023-09-06 03:58:33'),
+(64, 14, 2, 4, 45, 'D', '', 79, 'B', '', '2023-09-06 03:58:33', '2023-09-06 03:58:33'),
+(65, 14, 2, 5, 25, 'E', '', 20, 'E', '', '2023-09-06 03:58:33', '2023-09-06 03:58:33'),
+(66, 14, 2, 7, 94, 'A', '', 0, 'E', '', '2023-09-06 03:58:33', '2023-09-06 03:58:33'),
+(67, 15, 3, 1, 74, 'B', 'Quo in consectetur baik dalam menulis, membaca, dan mendengar. Quo in consectetur baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', 79, 'B', 'Quo in consectetur baik dalam menulis, membaca, dan mendengar. Quo in consectetur baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-06 03:58:40', '2023-09-06 03:58:40'),
+(68, 15, 3, 4, 0, 'E', '', 16, 'E', '', '2023-09-06 03:58:40', '2023-09-06 03:58:40'),
+(69, 15, 3, 5, 3, 'E', '', 86, 'A', '', '2023-09-06 03:58:40', '2023-09-06 03:58:40'),
+(70, 15, 3, 7, 51, 'C', '', 56, 'C', '', '2023-09-06 03:58:40', '2023-09-06 03:58:40'),
+(71, 16, 4, 1, 79, 'B', 'Voluptate et atque s baik dalam menulis, membaca, dan mendengar. Voluptate et atque s baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', 59, 'C', 'Voluptate et atque s cukup dalam menulis, membaca, dan mendengar. Voluptate et atque s cukup dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-06 03:58:47', '2023-09-06 03:58:47'),
+(72, 16, 4, 4, 81, 'B', '', 47, 'D', '', '2023-09-06 03:58:47', '2023-09-06 03:58:47'),
+(73, 16, 4, 5, 19, 'E', '', 54, 'C', '', '2023-09-06 03:58:47', '2023-09-06 03:58:47'),
+(74, 16, 4, 7, 69, 'B', '', 69, 'B', '', '2023-09-06 03:58:47', '2023-09-06 03:58:47'),
+(75, 26, 1, 1, 45, 'D', 'Sunt qui blanditiis kurang dalam  menulis, membaca, dan mendengar. Sunt qui blanditiis kurang dalam  mengeksplor lingkungan sekitar rumah tempat tinggal. ', 44, 'D', 'Sunt qui blanditiis kurang dalam  menulis, membaca, dan mendengar. Sunt qui blanditiis kurang dalam  mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-06 04:34:09', '2023-09-06 04:34:09'),
+(76, 26, 1, 4, 64, 'C', '', 72, 'B', '', '2023-09-06 04:34:09', '2023-09-06 04:34:09'),
+(77, 26, 1, 5, 66, 'B', '', 85, 'A', '', '2023-09-06 04:34:09', '2023-09-06 04:34:09'),
+(78, 26, 1, 7, 37, 'D', '', 81, 'B', '', '2023-09-06 04:34:09', '2023-09-06 04:34:09'),
+(79, 27, 2, 1, 97, 'A', 'Kang yayan sangat baik dalam menulis, membaca, dan mendengar. Kang yayan sangat baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', 87, 'A', 'Kang yayan sangat baik dalam menulis, membaca, dan mendengar. Kang yayan sangat baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-06 04:34:16', '2023-09-06 04:34:16'),
+(80, 27, 2, 4, 43, 'D', '', 100, 'A', '', '2023-09-06 04:34:16', '2023-09-06 04:34:16'),
+(81, 27, 2, 5, 70, 'B', '', 28, 'E', '', '2023-09-06 04:34:16', '2023-09-06 04:34:16'),
+(82, 27, 2, 7, 94, 'A', '', 92, 'A', '', '2023-09-06 04:34:16', '2023-09-06 04:34:16'),
+(83, 28, 3, 1, 45, 'D', 'Quo in consectetur kurang dalam  menulis, membaca, dan mendengar. Quo in consectetur kurang dalam  mengeksplor lingkungan sekitar rumah tempat tinggal. ', 87, 'A', 'Quo in consectetur sangat baik dalam menulis, membaca, dan mendengar. Quo in consectetur sangat baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-06 04:34:22', '2023-09-06 04:34:22'),
+(84, 28, 3, 4, 11, 'E', '', 55, 'C', '', '2023-09-06 04:34:22', '2023-09-06 04:34:22'),
+(85, 28, 3, 5, 75, 'B', '', 27, 'E', '', '2023-09-06 04:34:22', '2023-09-06 04:34:22'),
+(86, 28, 3, 7, 54, 'C', '', 21, 'E', '', '2023-09-06 04:34:22', '2023-09-06 04:34:22'),
+(87, 29, 1, 1, 41, 'D', 'Sunt qui blanditiis kurang dalam  menulis, membaca, dan mendengar. Sunt qui blanditiis kurang dalam  mengeksplor lingkungan sekitar rumah tempat tinggal. ', 18, 'E', 'Sunt qui blanditiis sangat kurang dalam menulis, membaca, dan mendengar. Sunt qui blanditiis sangat kurang dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-06 04:36:28', '2023-09-06 04:36:28'),
+(88, 29, 1, 4, 31, 'D', '', 84, 'B', '', '2023-09-06 04:36:28', '2023-09-06 04:36:28'),
+(89, 29, 1, 5, 20, 'E', '', 33, 'D', '', '2023-09-06 04:36:28', '2023-09-06 04:36:28'),
+(90, 29, 1, 7, 23, 'E', '', 88, 'A', '', '2023-09-06 04:36:28', '2023-09-06 04:36:28'),
+(91, 30, 2, 1, 28, 'E', 'Kang yayan sangat kurang dalam menulis, membaca, dan mendengar. Kang yayan sangat kurang dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', 69, 'B', 'Kang yayan baik dalam menulis, membaca, dan mendengar. Kang yayan baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-06 04:36:35', '2023-09-06 04:36:35'),
+(92, 30, 2, 4, 60, 'C', '', 19, 'E', '', '2023-09-06 04:36:35', '2023-09-06 04:36:35'),
+(93, 30, 2, 5, 20, 'E', '', 82, 'B', '', '2023-09-06 04:36:35', '2023-09-06 04:36:35'),
+(94, 30, 2, 7, 0, 'E', '', 2, 'E', '', '2023-09-06 04:36:35', '2023-09-06 04:36:35'),
+(95, 31, 3, 1, 12, 'E', 'Quo in consectetur sangat kurang dalam menulis, membaca, dan mendengar. Quo in consectetur sangat kurang dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', 98, 'A', 'Quo in consectetur sangat baik dalam menulis, membaca, dan mendengar. Quo in consectetur sangat baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-06 04:36:41', '2023-09-06 04:36:41'),
+(96, 31, 3, 4, 57, 'C', '', 32, 'D', '', '2023-09-06 04:36:41', '2023-09-06 04:36:41'),
+(97, 31, 3, 5, 100, 'A', '', 32, 'D', '', '2023-09-06 04:36:41', '2023-09-06 04:36:41'),
+(98, 31, 3, 7, 100, 'A', '', 66, 'B', '', '2023-09-06 04:36:41', '2023-09-06 04:36:41'),
+(99, 32, 4, 1, 30, 'D', 'Voluptate et atque s kurang dalam  menulis, membaca, dan mendengar. Voluptate et atque s kurang dalam  mengeksplor lingkungan sekitar rumah tempat tinggal. ', 23, 'E', 'Voluptate et atque s sangat kurang dalam menulis, membaca, dan mendengar. Voluptate et atque s sangat kurang dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-06 04:36:48', '2023-09-06 04:36:48'),
+(100, 32, 4, 4, 39, 'D', '', 38, 'D', '', '2023-09-06 04:36:48', '2023-09-06 04:36:48'),
+(101, 32, 4, 5, 100, 'A', '', 35, 'D', '', '2023-09-06 04:36:48', '2023-09-06 04:36:48'),
+(102, 32, 4, 7, 88, 'A', '', 72, 'B', '', '2023-09-06 04:36:48', '2023-09-06 04:36:48'),
+(103, 36, 1, 1, 90, 'A', 'Sunt qui blanditiis sangat baik dalam menulis, membaca, dan mendengar. Sunt qui blanditiis sangat baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', 8, 'E', 'Sunt qui blanditiis sangat kurang dalam menulis, membaca, dan mendengar. Sunt qui blanditiis sangat kurang dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-06 06:38:52', '2023-09-06 06:38:52'),
+(104, 36, 1, 3, 53, 'C', '', 21, 'E', '', '2023-09-06 06:38:52', '2023-09-06 06:38:52'),
+(105, 36, 1, 4, 31, 'D', '', 89, 'A', '', '2023-09-06 06:38:52', '2023-09-06 06:38:52'),
+(106, 36, 1, 7, 10, 'E', '', 1, 'E', '', '2023-09-06 06:38:52', '2023-09-06 06:38:52'),
+(107, 35, 3, 1, 96, 'A', 'Quo in consectetur sangat baik dalam menulis, membaca, dan mendengar. Quo in consectetur sangat baik dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', 53, 'C', 'Quo in consectetur cukup dalam menulis, membaca, dan mendengar. Quo in consectetur cukup dalam mengeksplor lingkungan sekitar rumah tempat tinggal. ', '2023-09-06 06:38:59', '2023-09-06 06:38:59'),
+(108, 35, 3, 3, 57, 'C', '', 50, 'C', '', '2023-09-06 06:38:59', '2023-09-06 06:38:59'),
+(109, 35, 3, 4, 62, 'C', '', 6, 'E', '', '2023-09-06 06:38:59', '2023-09-06 06:38:59'),
+(110, 35, 3, 7, 42, 'D', '', 5, 'E', '', '2023-09-06 06:38:59', '2023-09-06 06:38:59');
 
 -- --------------------------------------------------------
 
@@ -244,9 +363,7 @@ INSERT INTO `predikat` (`id_sistem`, `pred_a`, `pred_b`, `pred_c`, `pred_d`, `pr
 
 CREATE TABLE `raport` (
   `idraport` int NOT NULL,
-  `idsiswa` int NOT NULL DEFAULT '0',
-  `semester` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `th_pelajaran` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `id_transkrip` int NOT NULL,
   `sikap_spiritual` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `sikap_sosial` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `eskul1` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
@@ -276,13 +393,34 @@ CREATE TABLE `raport` (
 -- Dumping data for table `raport`
 --
 
-INSERT INTO `raport` (`idraport`, `idsiswa`, `semester`, `th_pelajaran`, `sikap_spiritual`, `sikap_sosial`, `eskul1`, `deskripsi_eskul1`, `eskul2`, `deskripsi_eskul2`, `eskul3`, `deskripsi_eskul3`, `saran`, `tinggi_badan`, `berat_badan`, `pendengaran`, `penglihatan`, `gigi`, `prestasi1`, `ket_pres1`, `prestasi2`, `ket_pres2`, `sakit`, `izin`, `tanpa_ket`, `updated_at`, `created_at`) VALUES
-(1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-08-09 03:55:31', '2023-08-09 03:55:31'),
-(2, 2, '62', 'Quisquam ut qui corp', 'Vel blanditiis odit', 'Eiusmod eiusmod et e', 'Eum cillum saepe in', 'Dolorum consectetur', 'Dolorem minus eos de', 'Quae ducimus culpa', 'Quo voluptas distinc', 'Exercitationem ut ex', 'Elit labore delectu', '15', '76', 'Laboriosam maxime l', 'Eos quia illum ut', 'Animi et eligendi v', 'Est cum dolorem cons', 'Esse sed velit erro', 'Laboris sint harum r', 'Consectetur nesciunt', '9', '29', '13', '2023-08-10 17:02:54', '2023-08-09 04:06:50'),
-(3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-08-09 07:38:30', '2023-08-09 07:38:30'),
-(4, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-08-09 07:55:11', '2023-08-09 07:55:11'),
-(5, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-08-10 15:33:35', '2023-08-10 15:33:35'),
-(6, 10, '27', 'Consequat Blanditii', 'Hic illum debitis s', 'Fugiat minim accusan', 'Vero deleniti do non', 'Ut ad nisi ut nisi c', 'Velit voluptates acc', 'Iste labore est volu', 'Et enim ratione sunt', 'Maiores omnis sint q', 'Hic vel mollitia dig', '74', '4124523', 'Beatae sapiente illo', 'Amet fugiat quia i', 'Enim enim dolorem pe', 'Qui possimus est co', 'Officia quia molliti', 'Voluptatem Est vero', 'Quam magni illo accu', '34', '97', '84', '2023-08-10 18:06:30', '2023-08-10 17:46:36');
+INSERT INTO `raport` (`idraport`, `id_transkrip`, `sikap_spiritual`, `sikap_sosial`, `eskul1`, `deskripsi_eskul1`, `eskul2`, `deskripsi_eskul2`, `eskul3`, `deskripsi_eskul3`, `saran`, `tinggi_badan`, `berat_badan`, `pendengaran`, `penglihatan`, `gigi`, `prestasi1`, `ket_pres1`, `prestasi2`, `ket_pres2`, `sakit`, `izin`, `tanpa_ket`, `updated_at`, `created_at`) VALUES
+(1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-09-05 14:28:52', '2023-09-05 14:28:52'),
+(2, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-09-05 14:29:16', '2023-09-05 14:29:16'),
+(3, 41, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-09-06 12:28:46', '2023-09-06 12:28:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sistem`
+--
+
+CREATE TABLE `sistem` (
+  `id` int NOT NULL,
+  `id_ta` int NOT NULL,
+  `semester` int NOT NULL,
+  `pred_a` int NOT NULL,
+  `pred_b` int NOT NULL,
+  `pred_c` int NOT NULL,
+  `pred_d` int NOT NULL,
+  `pred_e` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `sistem`
+--
+
+INSERT INTO `sistem` (`id`, `id_ta`, `semester`, `pred_a`, `pred_b`, `pred_c`, `pred_d`, `pred_e`) VALUES
+(1, 41, 1, 85, 65, 50, 30, 0);
 
 -- --------------------------------------------------------
 
@@ -314,8 +452,7 @@ CREATE TABLE `siswa` (
   `nama_wali` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `pekerjaan_wali` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `alamat_wali` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `foto` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'none.jpg',
-  `updated_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -323,16 +460,96 @@ CREATE TABLE `siswa` (
 -- Dumping data for table `siswa`
 --
 
-INSERT INTO `siswa` (`idsiswa`, `idkelas`, `nama_siswa`, `no_induk`, `nis`, `tempat_lahir`, `tgl_lahir`, `jenis_kelamin`, `agama`, `anak_ke`, `alamat_siswa`, `nama_ayah`, `nama_ibu`, `pekerjaan_ayah`, `pekerjaan_ibu`, `jalan`, `kelurahan_desa`, `kecamatan_kota`, `kabupaten_kota`, `provinsi`, `nama_wali`, `pekerjaan_wali`, `alamat_wali`, `foto`, `updated_at`, `created_at`) VALUES
-(2, 7, 'Ahmad', '4126418', '1254124', 'Cirebon', '1987-04-21', 'L', 'Islam', 3, 'cirebon', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'none.jpg', '2023-08-09 04:06:50', '2023-08-09 04:06:50'),
-(3, 6, 'Ahmad Mulyana', '42', '36', 'Inventore et aliquid', '1970-06-20', 'L', 'Consequat Molestias', 6, 'Pariatur Autem aute', 'Temporibus sed eum l', 'Vel assumenda do neq', 'Ullamco adipisicing', 'Ipsum explicabo Su', 'Qui dolorum voluptat', 'Pariatur Reprehende', 'Non nostrud ut vitae', 'Sunt rerum delectus', 'Minim earum iste ess', 'Ut ut qui unde delec', 'Occaecat facere aliq', 'Dolor ut cupiditate', 'none.jpg', '2023-08-10 07:43:41', '2023-08-09 07:38:30'),
-(4, 6, 'Hilman Sky', '88', '95', 'Voluptatem accusanti', '1985-06-15', 'L', 'Non beatae optio re', 79, 'Error unde amet vol', 'Assumenda eaque cons', 'In fugiat vel eos q', 'Nulla magnam eligend', 'Adipisci aut sit si', 'Officia quia in ipsu', 'Quis eu unde labore', 'Sit ea minim except', 'Magna commodo quia e', 'Voluptatem obcaecati', 'Ullamco provident o', 'Ex adipisicing qui m', 'Corporis incidunt q', 'image_2023-08-09_145510139.png', '2023-08-09 08:10:01', '2023-08-09 07:55:11'),
-(5, 13, 'Sahal', '19', '20210120016', 'Cillum aut dolore pr', '1986-10-24', 'L', 'Nisi aliquam provide', 92, 'Voluptatem eaque quo', 'Magna nisi commodi i', 'Dicta quos amet et', 'Autem tenetur at eve', 'Ea voluptate volupta', 'Aute et est soluta d', 'Officiis magnam dele', 'Laboriosam sint qui', 'Ex et id neque minu', 'Sed quaerat quae nul', 'Asperiores facilis e', 'Quisquam consequuntu', 'Beatae mollitia offi', 'WhatsApp Image 2023-08-10 at 11.19.53.jpg', '2023-08-10 15:31:39', '2023-08-10 15:31:39'),
-(6, 13, 'Sahal', '19', '20210120016', 'Cillum aut dolore pr', '1986-10-24', 'L', 'Nisi aliquam provide', 92, 'Voluptatem eaque quo', 'Magna nisi commodi i', 'Dicta quos amet et', 'Autem tenetur at eve', 'Ea voluptate volupta', 'Aute et est soluta d', 'Officiis magnam dele', 'Laboriosam sint qui', 'Ex et id neque minu', 'Sed quaerat quae nul', 'Asperiores facilis e', 'Quisquam consequuntu', 'Beatae mollitia offi', 'WhatsApp Image 2023-08-10 at 11.19.53.jpg', '2023-08-10 15:32:34', '2023-08-10 15:32:34'),
-(7, 15, 'Aliquip quam id nihi', '45', '1', 'Voluptatem commodi d', '1972-03-19', 'P', 'Aut sunt tempore s', 20, 'Et vel voluptatem er', 'Cum quidem quidem cu', 'Porro culpa ad vel n', 'Officia fuga Magnam', 'Esse aperiam non no', 'Asperiores molestiae', 'Aut dolorem dolores', 'Illum architecto ut', 'Sit sed qui ipsum e', 'Voluptate quo numqua', 'Id ullam illo conse', 'Rerum aut lorem culp', 'Enim magnam natus et', 'WhatsApp Image 2023-08-10 at 11.19.53.jpg', '2023-08-10 15:32:56', '2023-08-10 15:32:56'),
-(8, 15, 'Aliquip quam id nihi', '45', '1', 'Voluptatem commodi d', '1972-03-19', 'P', 'Aut sunt tempore s', 20, 'Et vel voluptatem er', 'Cum quidem quidem cu', 'Porro culpa ad vel n', 'Officia fuga Magnam', 'Esse aperiam non no', 'Asperiores molestiae', 'Aut dolorem dolores', 'Illum architecto ut', 'Sit sed qui ipsum e', 'Voluptate quo numqua', 'Id ullam illo conse', 'Rerum aut lorem culp', 'Enim magnam natus et', 'WhatsApp Image 2023-08-10 at 11.19.53.jpg', '2023-08-10 15:33:11', '2023-08-10 15:33:11'),
-(9, 15, 'Aliquip quam id nihi', '45', '1', 'Voluptatem commodi d', '1972-03-19', 'P', 'Aut sunt tempore s', 20, 'Et vel voluptatem er', 'Cum quidem quidem cu', 'Porro culpa ad vel n', 'Officia fuga Magnam', 'Esse aperiam non no', 'Asperiores molestiae', 'Aut dolorem dolores', 'Illum architecto ut', 'Sit sed qui ipsum e', 'Voluptate quo numqua', 'Id ullam illo conse', 'Rerum aut lorem culp', 'Enim magnam natus et', 'WhatsApp Image 2023-08-10 at 11.19.53.jpg', '2023-08-10 15:33:35', '2023-08-10 15:33:35'),
-(10, 16, 'Nashiruddin Sahal', '25', '12345', 'Quaerat rem possimus', '1974-02-11', 'P', 'Quis maxime veniam', 57, 'Fugit mollit conseq', 'Enim placeat dolor', 'Pariatur Beatae rei', 'Est ut dignissimos q', 'Enim illo suscipit v', 'Eos expedita odit i', 'Alias ratione possim', 'Maxime minim minus i', 'Illum aliqua Non v', 'Et ut accusamus et i', 'Deleniti optio vel', 'Temporibus esse nemo', 'Nostrud deserunt qui', 'WhatsApp Image 2023-08-10 at 11.19.53.jpg', '2023-08-10 17:46:36', '2023-08-10 17:46:36');
+INSERT INTO `siswa` (`idsiswa`, `idkelas`, `nama_siswa`, `no_induk`, `nis`, `tempat_lahir`, `tgl_lahir`, `jenis_kelamin`, `agama`, `anak_ke`, `alamat_siswa`, `nama_ayah`, `nama_ibu`, `pekerjaan_ayah`, `pekerjaan_ibu`, `jalan`, `kelurahan_desa`, `kecamatan_kota`, `kabupaten_kota`, `provinsi`, `nama_wali`, `pekerjaan_wali`, `alamat_wali`, `updated_at`, `created_at`) VALUES
+(1, 15, 'Sunt qui blanditiis', '9', '27', 'Pariatur Modi aliqu', '1980-05-04', 'L', 'Est a esse qui qui', 36, 'Laboriosam quis sit', 'Magna consequatur es', 'Eveniet nemo a volu', 'Consequuntur sunt ex', 'Magnam eum mollit do', 'Sint officia id eli', 'Pariatur Vitae non', 'Excepteur ad consequ', 'Sint corporis nisi', 'Iusto voluptatem min', NULL, NULL, NULL, '2023-09-05 07:27:47', '2023-09-05 07:27:47'),
+(2, 12, 'Kang yayan', '13', '14', 'Consequat Quia occa', '2023-01-06', 'P', 'In eu consequat Rat', 16, 'Officia sunt pariatu', 'Veniam qui inventor', 'Est aliqua Laboris', 'Dicta laboriosam ve', 'In quibusdam proiden', 'Architecto est qui q', 'Et odit nostrud proi', 'Fugiat eum dolor vel', 'Id sit repudiandae', 'Quidem fugit mollit', NULL, NULL, NULL, '2023-09-05 07:28:17', '2023-09-05 07:28:17'),
+(3, 15, 'Quo in consectetur', '86', '73', 'Sit at recusandae I', '1987-05-12', 'P', 'Voluptatem quos repr', 92, 'Dolore porro consequ', 'Illum quis recusand', 'Reiciendis dignissim', 'In magna cillum nisi', 'Est praesentium con', 'Accusantium vero con', 'Aut dolor vel eos qu', 'Pariatur Eligendi i', 'Commodo voluptate co', 'Magni ullamco et qui', NULL, NULL, NULL, '2023-09-05 07:28:52', '2023-09-05 07:28:52'),
+(4, 7, 'Voluptate et atque s', '7', '47', 'Mollit impedit nece', '1977-10-18', 'L', 'Porro sunt sed beat', 82, 'Fugiat nihil ea exe', 'Irure saepe minus do', 'Nemo sed modi laboru', 'Est voluptates dolor', 'Sit nisi exercitati', 'Neque enim tenetur m', 'Quia sed molestias n', 'Recusandae Cupidata', 'Commodo dolore solut', 'In sint qui earum ma', NULL, NULL, NULL, '2023-09-05 07:29:15', '2023-09-05 07:29:15'),
+(5, 16, 'Dasman', '89', '22', 'Sunt debitis quis au', '1993-11-10', 'P', 'Et voluptatem Offic', 32, 'Blanditiis reprehend', 'Sit minus reprehend', 'Aut aspernatur magni', 'Nam quaerat accusant', 'Iste dolore ut animi', 'Est deleniti incidid', 'Aut ex culpa est an', 'Dicta labore quis ex', 'Quaerat minima et et', 'Facilis tenetur null', NULL, NULL, NULL, '2023-09-06 05:30:30', '2023-09-06 05:28:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tahun_ajaran`
+--
+
+CREATE TABLE `tahun_ajaran` (
+  `id_ta` int NOT NULL,
+  `ta_awal` year NOT NULL,
+  `ta_akhir` year NOT NULL,
+  `status` tinyint NOT NULL DEFAULT '1',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tahun_ajaran`
+--
+
+INSERT INTO `tahun_ajaran` (`id_ta`, `ta_awal`, `ta_akhir`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2021, 2022, 0, '2023-09-03 05:37:39', '2023-09-03 05:37:39'),
+(2, 2022, 2023, 0, '2023-09-03 05:37:39', '2023-09-03 05:37:39'),
+(37, 2023, 2024, 0, '2023-09-05 22:39:21', '2023-09-05 22:39:21'),
+(38, 2024, 2025, 0, '2023-09-05 23:55:07', '2023-09-05 23:55:07'),
+(39, 2025, 2026, 0, '2023-09-06 03:22:54', '2023-09-06 03:22:54'),
+(40, 2027, 2028, 0, '2023-09-06 04:29:22', '2023-09-06 04:29:22'),
+(41, 2028, 2029, 1, '2023-09-06 04:37:10', '2023-09-06 04:37:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transkrip`
+--
+
+CREATE TABLE `transkrip` (
+  `id_transkrip` int NOT NULL,
+  `id_ta` int NOT NULL,
+  `idsiswa` int NOT NULL,
+  `kelas` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `semester` int NOT NULL DEFAULT '1',
+  `status` int NOT NULL,
+  `keterangan` varchar(100) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `transkrip`
+--
+
+INSERT INTO `transkrip` (`id_transkrip`, `id_ta`, `idsiswa`, `kelas`, `semester`, `status`, `keterangan`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, NULL, 1, 0, NULL, '2023-09-05 14:27:47', '2023-09-05 14:27:47'),
+(2, 1, 2, NULL, 1, 0, NULL, '2023-09-05 14:28:17', '2023-09-05 14:28:17'),
+(3, 1, 3, NULL, 1, 0, NULL, '2023-09-05 14:28:52', '2023-09-05 14:28:52'),
+(4, 1, 4, NULL, 1, 0, NULL, '2023-09-05 14:29:15', '2023-09-05 14:29:15'),
+(5, 37, 1, NULL, 2, 0, NULL, '2023-09-06 06:38:31', '2023-09-06 06:38:31'),
+(6, 37, 2, NULL, 2, 0, NULL, '2023-09-06 06:38:31', '2023-09-06 06:38:31'),
+(7, 37, 3, NULL, 2, 0, NULL, '2023-09-06 06:38:31', '2023-09-06 06:38:31'),
+(8, 37, 4, NULL, 2, 0, NULL, '2023-09-06 06:38:31', '2023-09-06 06:38:31'),
+(9, 38, 1, NULL, 2, 1, NULL, '2023-09-06 10:03:01', '2023-09-06 10:03:01'),
+(10, 38, 2, NULL, 2, 1, NULL, '2023-09-06 10:03:01', '2023-09-06 10:03:01'),
+(11, 38, 3, NULL, 2, 1, NULL, '2023-09-06 10:03:01', '2023-09-06 10:03:01'),
+(12, 38, 4, NULL, 2, 1, NULL, '2023-09-06 10:03:01', '2023-09-06 10:03:01'),
+(13, 39, 1, '6B', 2, 1, NULL, '2023-09-06 10:57:57', '2023-09-06 10:57:57'),
+(14, 39, 2, '3A', 2, 1, NULL, '2023-09-06 10:57:57', '2023-09-06 10:57:57'),
+(15, 39, 3, '5A', 2, 1, NULL, '2023-09-06 10:57:57', '2023-09-06 10:57:57'),
+(16, 39, 4, '6A', 2, 1, NULL, '2023-09-06 10:57:57', '2023-09-06 10:57:57'),
+(26, 40, 1, '5A', 1, 0, NULL, '2023-09-06 11:33:55', '2023-09-06 11:33:55'),
+(27, 40, 2, '5A', 1, 1, NULL, '2023-09-06 11:33:55', '2023-09-06 11:33:55'),
+(28, 40, 3, '5A', 1, 1, NULL, '2023-09-06 11:33:55', '2023-09-06 11:33:55'),
+(29, 40, 1, '5A', 2, 1, NULL, '2023-09-06 11:34:27', '2023-09-06 11:34:27'),
+(30, 40, 2, '5A', 2, 1, NULL, '2023-09-06 11:34:27', '2023-09-06 11:34:27'),
+(31, 40, 3, '5A', 2, 1, NULL, '2023-09-06 11:34:27', '2023-09-06 11:34:27'),
+(32, 40, 4, '6A', 2, 1, NULL, '2023-09-06 11:34:27', '2023-09-06 11:34:27'),
+(33, 41, 1, '1A', 1, 1, NULL, '2023-09-06 11:45:11', '2023-09-06 11:45:11'),
+(34, 41, 2, '1A', 1, 1, NULL, '2023-09-06 11:45:11', '2023-09-06 11:45:11'),
+(35, 41, 3, '3A', 1, 1, NULL, '2023-09-06 11:45:11', '2023-09-06 11:45:11'),
+(36, 41, 1, '3A', 1, 1, NULL, '2023-09-06 11:45:49', '2023-09-06 11:45:49'),
+(37, 41, 3, '2A', 1, 1, NULL, '2023-09-06 11:45:49', '2023-09-06 11:45:49'),
+(38, 41, 1, '3A', 1, 1, NULL, '2023-09-06 11:47:38', '2023-09-06 11:47:38'),
+(39, 41, 2, '2A', 1, 0, NULL, '2023-09-06 11:47:38', '2023-09-06 11:47:38'),
+(40, 41, 3, '3A', 1, 1, NULL, '2023-09-06 11:47:38', '2023-09-06 11:47:38'),
+(41, 41, 5, NULL, 1, 1, NULL, '2023-09-06 12:28:46', '2023-09-06 12:28:46');
 
 -- --------------------------------------------------------
 
@@ -347,8 +564,9 @@ CREATE TABLE `users` (
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `role` tinyint NOT NULL COMMENT '0=siswa;1=admin;3=walas',
+  `role` tinyint NOT NULL COMMENT '0=siswa;1=admin;2=walas;3=guru mapel',
   `id_join` int NOT NULL DEFAULT '0',
+  `foto` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -357,10 +575,16 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `role`, `id_join`, `created_at`, `updated_at`) VALUES
-(5, 'Super Admin', 'admin@mail.com', NULL, '$2y$10$YJs/U2aBZRbapIWxC2.iC.5zCQactf7D.aCk8kYR/woJidvXYE3b2', NULL, 1, 0, '2023-08-08 02:33:20', '2023-08-08 02:33:20'),
-(6, 'Sri Ningtyas', 'walas@mail.com', NULL, '$2y$10$nhuUYmnMYpd.YBKdnVZ.cORCeGxV/WrmHx8pIaoJ//5TJaqbgYqEa', NULL, 2, 7, '2023-08-08 02:33:20', '2023-08-08 02:33:20'),
-(10, 'Nashiruddin Sahal', '12345@stambuk.com', NULL, '$2y$10$9w.08Q1TUuvWTa6CbPoCbes9MMIbYEdkj4dkTdXrlmpXtkuW7Zk96', NULL, 0, 10, '2023-08-10 10:46:36', '2023-08-10 10:46:36');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `role`, `id_join`, `foto`, `created_at`, `updated_at`) VALUES
+(5, 'Administrator', 'admin@mail.com', NULL, '$2y$10$o2f/TY0q7.5DBVAmhirDEugQY6GJbt1elzWDlI25FYaj2Ng0yiIAa', NULL, 1, 0, '1693975961.jpg', '2023-08-08 02:33:20', '2023-08-08 02:33:20'),
+(6, 'Sri Ningtyas', 'walas@mail.com', NULL, '$2y$10$jINLYCfPZj8hSo4CPLsJJun9ji5S8qDp9dGWWbqj.6119k5OdIuMK', NULL, 2, 7, NULL, '2023-08-08 02:33:20', '2023-08-08 02:33:20'),
+(15, 'tutiskom mpdi', 'tuti@mail.com', NULL, '$2y$10$INE0aBt6jx01geWgIq93gOjjmscEkg6svlQlhjOIx7hQ.WyOu08gK', NULL, 3, 2, NULL, '2023-09-02 21:06:39', '2023-09-02 21:06:39'),
+(16, 'vgfghf', 'vgaga@mail.com', NULL, '$2y$10$4Mv1hagAaxodDXtu0XKS8e988vDxuCVOvKq9XfP.ZI30oHFVvrneK', NULL, 3, 4, NULL, '2023-09-02 22:21:16', '2023-09-02 22:21:16'),
+(27, 'Sunt qui blanditiis', '27@stambuk.com', NULL, '$2y$10$5gMjHx2IAa71DL4HgyHOv.kFiDK6f0pl1CT1A6APyXRzLmyWv20f.', NULL, 0, 1, NULL, '2023-09-05 00:27:48', '2023-09-05 00:27:48'),
+(28, 'Error in commodo sun', '14@stambuk.com', NULL, '$2y$10$Av8wcBf5pmzyQlJbr.rDV.Cb2PJE8sNvDyDNF4NbXcKEz0DFL6YRG', NULL, 0, 2, NULL, '2023-09-05 00:28:17', '2023-09-05 00:28:17'),
+(29, 'Quo in consectetur', '73@stambuk.com', NULL, '$2y$10$Mu3EJYYX5iFUiXN.mVXdTuaUIaMFkLE1K3.bTNv0NQZky5HA6e9cq', NULL, 0, 3, NULL, '2023-09-05 00:28:52', '2023-09-05 00:28:52'),
+(30, 'Voluptate et atque s', '47@stambuk.com', NULL, '$2y$10$x4GhouqEk29WO9SWkjj8Uu2g0HXAEtj.RqGgRYKOzEYCdSqXP9diS', NULL, 0, 4, NULL, '2023-09-05 00:29:16', '2023-09-05 00:29:16'),
+(31, 'Quo nulla officia ne', '22@stambuk.com', NULL, '$2y$10$AituvrJciTPjyYtTfo./d.zK8hy5aP0GfcZdYELKnToMEjyMR3Kdm', NULL, 0, 5, NULL, '2023-09-05 22:28:46', '2023-09-05 22:28:46');
 
 -- --------------------------------------------------------
 
@@ -410,6 +634,18 @@ INSERT INTO `wali_kelas` (`idwali_kelas`, `nama`, `nip`, `tempat_lahir`, `tangga
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `guru_mapel`
+--
+ALTER TABLE `guru_mapel`
+  ADD PRIMARY KEY (`id_gurumapel`);
+
+--
+-- Indexes for table `history_nilai`
+--
+ALTER TABLE `history_nilai`
+  ADD PRIMARY KEY (`id_history`);
 
 --
 -- Indexes for table `kelas`
@@ -472,11 +708,29 @@ ALTER TABLE `raport`
   ADD PRIMARY KEY (`idraport`);
 
 --
+-- Indexes for table `sistem`
+--
+ALTER TABLE `sistem`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `siswa`
 --
 ALTER TABLE `siswa`
   ADD PRIMARY KEY (`idsiswa`),
   ADD KEY `idkelas` (`idkelas`);
+
+--
+-- Indexes for table `tahun_ajaran`
+--
+ALTER TABLE `tahun_ajaran`
+  ADD PRIMARY KEY (`id_ta`);
+
+--
+-- Indexes for table `transkrip`
+--
+ALTER TABLE `transkrip`
+  ADD PRIMARY KEY (`id_transkrip`);
 
 --
 -- Indexes for table `users`
@@ -502,6 +756,18 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `guru_mapel`
+--
+ALTER TABLE `guru_mapel`
+  MODIFY `id_gurumapel` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `history_nilai`
+--
+ALTER TABLE `history_nilai`
+  MODIFY `id_history` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
@@ -511,7 +777,7 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT for table `kriteria_nilai`
 --
 ALTER TABLE `kriteria_nilai`
-  MODIFY `idkriteria` int NOT NULL AUTO_INCREMENT;
+  MODIFY `idkriteria` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `mapel`
@@ -529,7 +795,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `nilai`
 --
 ALTER TABLE `nilai`
-  MODIFY `idnilai` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `idnilai` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -541,25 +807,43 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `predikat`
 --
 ALTER TABLE `predikat`
-  MODIFY `id_sistem` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_sistem` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `raport`
 --
 ALTER TABLE `raport`
-  MODIFY `idraport` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idraport` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `sistem`
+--
+ALTER TABLE `sistem`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `idsiswa` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idsiswa` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tahun_ajaran`
+--
+ALTER TABLE `tahun_ajaran`
+  MODIFY `id_ta` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT for table `transkrip`
+--
+ALTER TABLE `transkrip`
+  MODIFY `id_transkrip` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `wali_kelas`
@@ -587,8 +871,7 @@ ALTER TABLE `kriteria_nilai`
 -- Constraints for table `nilai`
 --
 ALTER TABLE `nilai`
-  ADD CONSTRAINT `nilai_ibfk_2` FOREIGN KEY (`id_mapel`) REFERENCES `mapel` (`idmapel`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `nilai_ibfk_3` FOREIGN KEY (`idsiswa`) REFERENCES `siswa` (`idsiswa`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `nilai_ibfk_2` FOREIGN KEY (`id_mapel`) REFERENCES `mapel` (`idmapel`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `siswa`

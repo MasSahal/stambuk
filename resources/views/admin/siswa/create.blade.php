@@ -193,12 +193,6 @@
                                     <input type="text" name="alamat_wali" id="alamat_wali" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="foto">Foto</label>
-                                    <input type="file" name="foto" id="foto" class="form-control">
-                                </div>
-                            </div>
                         </div>
                         <hr>
                         <button type="submit" class="btn btn-primary">Tambahkan</button>

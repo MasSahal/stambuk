@@ -17,7 +17,7 @@
                 <div class="card-body">
 
                     <div class="table-responsive b-0">
-                        <table id="menu" class="table table-striped">
+                        <table id="menu" class="table table-striped" width="100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -31,20 +31,20 @@
                                     <tr>
                                         <td>{{ $i += 1 }}</td>
                                         <td>{{ $r->nama_siswa }}</td>
-                                        <td>{{ $r->nama_kelas }}</td>
+                                        <td>{{ $r->kelas }}</td>
                                         <td>
                                             @if ($r->input_nilai)
                                                 <a name="" id="" class="btn btn-sm btn-secondary"
-                                                    href="{{ route('nilai.show', $r->idsiswa) }}" role="button">
+                                                    href="{{ route('nilai.show', $r->id_transkrip) }}" role="button">
                                                     Lihat Nilai
                                                 </a>
                                                 <a name="" id="" class="btn btn-sm btn-warning"
-                                                    href="{{ route('nilai.edit', $r->idsiswa) }}" role="button">
+                                                    href="{{ route('nilai.edit', $r->id_transkrip) }}" role="button">
                                                     Edit Nilai
                                                 </a>
                                             @else
                                                 <a name="" id="" class="btn btn-sm btn-info"
-                                                    href="{{ route('nilai.create', 'idsiswa=' . $r->idsiswa) }}"
+                                                    href="{{ route('nilai.create', 'id_transkrip=' . $r->id_transkrip . '&id_transkrip=' . $r->id_transkrip) }}"
                                                     role="button">
                                                     Input Nilai
                                                 </a>

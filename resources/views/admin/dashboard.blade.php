@@ -6,6 +6,13 @@
         <div class="col-xl-12 stretch-card grid-margin">
             <div class="card">
                 <div class="card-body">
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-light-success color-success  alert-dismissible show fade">
+                            {{ $message }}.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <hr>
+                        </div>
+                    @endif
                     <div class="jumbotron jumbotron-fluid">
                         <div class="container">
                             <h1 class="display-3">Selamat Datang di STAMBUK!</h1>

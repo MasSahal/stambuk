@@ -103,17 +103,17 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($nilai_u as $i => $r)
-                                        <tr>
-                                            <td>{{ $i += 1 }}</td>
-                                            <td>{{ $r->nama_mapel }}</td>
-                                            <td>{{ $r->p_nilai }}</td>
-                                            <td>{{ $r->p_predikat }}</td>
-                                            <td>{{ $r->p_deskripsi }}</td>
-                                            <td>{{ $r->k_nilai }}</td>
-                                            <td>{{ $r->k_predikat }}</td>
-                                            <td>{{ $r->k_deskripsi }}</td>
-                                        </tr>
-                                    @endforeach
+                                            <tr>
+                                                <td>{{ $i += 1 }}</td>
+                                                <td>@php echo $r->nama_mapel @endphp</td>
+                                                <td>@php echo $r->p_nilai @endphp</td>
+                                                <td>@php echo $r->p_predikat @endphp</td>
+                                                <td>@php echo $r->p_deskripsi @endphp</td>
+                                                <td>@php echo $r->k_nilai @endphp</td>
+                                                <td>@php echo $r->k_predikat @endphp</td>
+                                                <td>@php echo $r->k_deskripsi @endphp</td>
+                                            </tr>
+                                        @endforeach
                                 </tbody>
                             </table>
 
@@ -142,17 +142,17 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($nilai_m as $i => $r)
-                                        <tr>
-                                            <td>{{ $i += 1 }}</td>
-                                            <td>{{ $r->nama_mapel }}</td>
-                                            <td>{{ $r->p_nilai }}</td>
-                                            <td>{{ $r->p_predikat }}</td>
-                                            <td>{{ $r->p_deskripsi }}</td>
-                                            <td>{{ $r->k_nilai }}</td>
-                                            <td>{{ $r->k_predikat }}</td>
-                                            <td>{{ $r->k_deskripsi }}</td>
-                                        </tr>
-                                    @endforeach
+                                            <tr>
+                                                <td>{{ $i += 1 }}</td>
+                                                <td>@php echo $r->nama_mapel @endphp</td>
+                                                <td>@php echo $r->p_nilai @endphp</td>
+                                                <td>@php echo $r->p_predikat @endphp</td>
+                                                <td>@php echo $r->p_deskripsi @endphp</td>
+                                                <td>@php echo $r->k_nilai @endphp</td>
+                                                <td>@php echo $r->k_predikat @endphp</td>
+                                                <td>@php echo $r->k_deskripsi @endphp</td>
+                                            </tr>
+                                        @endforeach
                                 </tbody>
                             </table>
 

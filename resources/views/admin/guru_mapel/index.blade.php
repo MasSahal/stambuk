@@ -3,11 +3,11 @@
 
 @section('content')
     <div class="page-header">
-        <h3 class="page-title">Data Siswa {{ $kelas->nama_kelas ?? '' }}</h3>
+        <h3 class="page-title">Data Guru Mata Pelajaran</h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page"> Data Siswa {{ $kelas->nama_kelas ?? '' }}</li>
+                <li class="breadcrumb-item active" aria-current="page"> Data Guru Mata Pelajaran </li>
             </ol>
         </nav>
     </div>
@@ -15,10 +15,10 @@
         <div class="col-12">
             <div class="card m-b-30">
                 <div class="card-body">
-                    <a href="{{ route('siswa.create') }}" class="btn btn-success mt-2 mt-sm-0 btn-icon-text">
+                    <a href="{{ route('guru_mapel.create') }}" class="btn btn-success mt-2 mt-sm-0 btn-icon-text">
                         Tambah Data
                     </a>
-                    <a href="{{ route('siswa.index') }}" class="btn btn-info mt-2 mt-sm-0 btn-icon-text">
+                    <a href="{{ route('guru_mapel.index') }}" class="btn btn-info mt-2 mt-sm-0 btn-icon-text">
                         Refresh
                     </a>
 
@@ -42,9 +42,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>NISN</th>
-                                    <th>Nama Siswa</th>
-                                    <th>Kelas</th>
+                                    <th>NIP</th>
+                                    <th>Nama Guru</th>
+                                    <th>Mata Pelajaran Pengampu</th>
+                                    <th>Jenis Kelamin</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -52,35 +53,21 @@
                                 @foreach ($record as $i => $r)
                                     <tr>
                                         <td>{{ $i += 1 }}</td>
-                                        <td>{{ $r->no_induk }}</td>
-                                        <td>{{ $r->nama_siswa }}</td>
-                                        <td>{{ $r->nama_kelas }}</td>
+                                        <td>{{ $r->nip }}</td>
+                                        <td>{{ $r->nama_guru }}</td>
+                                        <td>{{ $r->nama_mapel }}</td>
+                                        <td>{{ $r->jenis_kelamin }}</td>
                                         <td>
-                                            <form action="{{ route('siswa.destroy', $r->idsiswa) }}" method="POST"
-                                                class="m-0 p-0">
-                                                <a name="" id="" class="btn btn-sm btn-secondary"
-                                                    href="{{ route('siswa.show', $r->idsiswa . '?aksi=profile') }}"
-                                                    role="button">
-                                                    Lihat Biodata
-                                                </a>
-                                                <a name="" id="" class="btn btn-sm btn-info"
-                                                    href="{{ route('siswa.show', $r->idsiswa . '?aksi=raport') }}"
-                                                    role="button">
-                                                    Lihat Raport
-                                                </a>
-                                                <a name="" id="" class="btn btn-sm btn-primary"
-                                                    href="{{ route('raport.edit', $r->idsiswa) }}" role="button">
-                                                    Perbarui Raport
-                                                </a>
-                                                |
+                                            <form action="{{ route('guru_mapel.destroy', $r->id_gurumapel) }}"
+                                                method="POST">
                                                 <a name="" id="" class="btn btn-sm btn-warning"
-                                                    href="{{ route('siswa.edit', $r->idsiswa) }}" role="button">
+                                                    href="{{ route('guru_mapel.edit', $r->id_gurumapel) }}" role="button">
                                                     Edit
                                                 </a>
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit"
-                                                    onclick="javascript: return confirm('Apakah anda ingin menghapus data siswa{{ $r->nama_siswa }} ? ')"
+                                                    onclick="javascript: return confirm('Apakah anda ingin menghapus data guru mapel {{ $r->nama_guru }} ? ')"
                                                     class="btn btn-sm btn-danger">
                                                     Hapus
                                                 </button>

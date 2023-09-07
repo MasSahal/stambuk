@@ -3,11 +3,11 @@
 
 @section('content')
     <div class="page-header">
-        <h3 class="page-title">{{ $title }}</h3>
+        <h3 class="page-title">Edit Kriteria Nilai</h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page"> {{ $title }} </li>
+                <li class="breadcrumb-item active" aria-current="page"> Edit Kriteria </li>
             </ol>
         </nav>
     </div>
@@ -26,35 +26,33 @@
                             <hr>
                         </div>
                     @endif
-
-                    <form action="{{ route('pengguna.update', $record->id) }}" method="post">
+                    <form action="{{ route('k_nilai.update', $record->idkriteria) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="row">
-                            <input type="hidden" name="role" value="1">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="name">Nama Pengguna</label>
-                                    <input type="text" name="name" id="name" class="form-control"
-                                        value="{{ $record->name }}" @if ($record->role == 0) readonly @endif>
+                                    <label for="">Pilih Mata Pelajaran</label>
+                                    <select class="form-control form-control-lg" name="idmapel" id="idmapel"
+                                        onchange="getTableKnilai(this.value)">
+                                        @foreach ($mapel as $i => $r)
+                                            <option value="{{ $r->idmapel }}"
+                                                {{ $r->idmapel == $record->idmapel ? 'selected' : '' }}>
+                                                {{ $r->nama_mapel }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" name="email" id="email" class="form-control"
-                                        value="{{ $record->email }}">
+                                    <label for="kriteria">Kriteria</label>
+                                    <textarea name="kriteria" id="" class="form-control" rows="3">@php echo $record->kriteria @endphp</textarea>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" name="password" id="password" class="form-control">
-                                </div>
-                            </div>
+
                         </div>
                         <hr>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary">Tambahkan</button>
                     </form>
                 </div>
             </div>

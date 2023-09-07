@@ -27,16 +27,15 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('pengguna.update', $record->id) }}" method="post">
+                    <form action="{{ route('simpan_profile', $record->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row">
-                            <input type="hidden" name="role" value="1">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name">Nama Pengguna</label>
                                     <input type="text" name="name" id="name" class="form-control"
-                                        value="{{ $record->name }}" @if ($record->role == 0) readonly @endif>
+                                        value="{{ $record->name }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -48,10 +47,18 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="foto">Foto</label>
+                                    <input type="file" name="foto" id="foto" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label for="password">Password</label>
                                     <input type="password" name="password" id="password" class="form-control">
                                 </div>
                             </div>
+
+
                         </div>
                         <hr>
                         <button type="submit" class="btn btn-primary">Simpan</button>

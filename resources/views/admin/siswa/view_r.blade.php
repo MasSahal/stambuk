@@ -53,7 +53,7 @@
                                 <tr>
                                     <td>Kelas</td>
                                     <td>:</td>
-                                    <td><?= $record->nama_kelas ?></td>
+                                    <td><?= $record->kelas ?></td>
                                 </tr>
                                 <tr>
                                     <td>Semester</td>
@@ -63,7 +63,7 @@
                                 <tr>
                                     <td>Tahun Ajar</td>
                                     <td>:</td>
-                                    <td><?= $record->th_pelajaran ?? '--' ?></td>
+                                    <td><?= $record->ta_awal . '/' . $record->ta_akhir ?? '--' ?></td>
                                 </tr>
                             </table>
                         </div>
@@ -119,13 +119,13 @@
                                     @foreach ($nilai_u as $i => $r)
                                         <tr>
                                             <td>{{ $i += 1 }}</td>
-                                            <td>{{ $r->nama_mapel }}</td>
-                                            <td>{{ $r->p_nilai }}</td>
-                                            <td>{{ $r->p_predikat }}</td>
-                                            <td>{{ $r->p_deskripsi }}</td>
-                                            <td>{{ $r->k_nilai }}</td>
-                                            <td>{{ $r->k_predikat }}</td>
-                                            <td>{{ $r->k_deskripsi }}</td>
+                                            <td>@php echo $r->nama_mapel @endphp</td>
+                                            <td>@php echo $r->p_nilai @endphp</td>
+                                            <td>@php echo $r->p_predikat @endphp</td>
+                                            <td>@php echo $r->p_deskripsi @endphp</td>
+                                            <td>@php echo $r->k_nilai @endphp</td>
+                                            <td>@php echo $r->k_predikat @endphp</td>
+                                            <td>@php echo $r->k_deskripsi @endphp</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -158,13 +158,13 @@
                                     @foreach ($nilai_m as $i => $r)
                                         <tr>
                                             <td>{{ $i += 1 }}</td>
-                                            <td>{{ $r->nama_mapel }}</td>
-                                            <td>{{ $r->p_nilai }}</td>
-                                            <td>{{ $r->p_predikat }}</td>
-                                            <td>{{ $r->p_deskripsi }}</td>
-                                            <td>{{ $r->k_nilai }}</td>
-                                            <td>{{ $r->k_predikat }}</td>
-                                            <td>{{ $r->k_deskripsi }}</td>
+                                            <td>@php echo $r->nama_mapel @endphp</td>
+                                            <td>@php echo $r->p_nilai @endphp</td>
+                                            <td>@php echo $r->p_predikat @endphp</td>
+                                            <td>@php echo $r->p_deskripsi @endphp</td>
+                                            <td>@php echo $r->k_nilai @endphp</td>
+                                            <td>@php echo $r->k_predikat @endphp</td>
+                                            <td>@php echo $r->k_deskripsi @endphp</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -287,6 +287,8 @@
                     <div class="mt-2">
                         <hr>
                         <a href="{{ route('siswa.index') }}" class="btn btn-secondary">Kembali</a>
+                        <a href="{{ route('siswa.print', $record->idsiswa) . '?aksi=raport' }}" class="btn btn-success"
+                            target="_blank">Print</a>
                     </div>
                 </div>
             </div>

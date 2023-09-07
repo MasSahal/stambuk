@@ -40,42 +40,46 @@
                         <hr>
                         <div class="row">
                             <div class="col-md-12">
-                                <table class="table table-striped table-responsive-lg" id="table">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th rowspan="2">No</th>
-                                            <th rowspan="2">Mata Pelajaran</th>
-                                            <th colspan="3">
-                                                Pengetahuan
-                                            </th>
-                                            <th colspan="3">
-                                                Keterampilan
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th>Nilai</th>
-                                            <th>Predikat</th>
-                                            <th>Deskripsi</th>
-                                            <th>Nilai</th>
-                                            <th>Predikat</th>
-                                            <th>Deskripsi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($nilai as $i => $r)
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="table">
+                                        <thead class="thead-light">
                                             <tr>
-                                                <td>{{ $i += 1 }}</td>
-                                                <td>{{ $r->nama_mapel }}</td>
-                                                <td>{{ $r->p_nilai }}</td>
-                                                <td>{{ $r->p_predikat }}</td>
-                                                <td>{{ $r->p_deskripsi }}</td>
-                                                <td>{{ $r->k_nilai }}</td>
-                                                <td>{{ $r->k_predikat }}</td>
-                                                <td>{{ $r->k_deskripsi }}</td>
+                                                <th rowspan="2">No</th>
+                                                <th rowspan="2">Mata Pelajaran</th>
+                                                <th colspan="3">
+                                                    Pengetahuan
+                                                </th>
+                                                <th colspan="3">
+                                                    Keterampilan
+                                                </th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                            <tr>
+                                                <th>Nilai</th>
+                                                <th>Predikat</th>
+                                                <th>Deskripsi</th>
+                                                <th>Nilai</th>
+                                                <th>Predikat</th>
+                                                <th>Deskripsi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($nilai as $i => $r)
+                                                <tr>
+                                                    <td>{{ $i += 1 }}</td>
+                                                    <td>@php echo $r->nama_mapel @endphp</td>
+                                                    <td>@php echo $r->p_nilai @endphp</td>
+                                                    <td>@php echo $r->p_predikat @endphp</td>
+                                                    <td>
+                                                        @php echo str_replace('.', '. </br>', $r->p_deskripsi) @endphp</td>
+                                                    <td>@php echo $r->k_nilai @endphp</td>
+                                                    <td>@php echo $r->k_predikat @endphp</td>
+                                                    <td>
+                                                        @php echo str_replace('.', '. </br>', $r->k_deskripsi) @endphp</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <a href="{{ route('nilai.index') }}" class="btn btn-secondary">Kembali</a>

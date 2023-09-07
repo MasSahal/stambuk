@@ -9,8 +9,15 @@
         </div>
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
-                <a class="nav-link" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                    SELAMAT DATANG DI STAMBUK
+                <a class="nav-link text-uppercase" id="messageDropdown" href="#" data-bs-toggle="dropdown"
+                    aria-expanded="false">SELAMAT DATANG DI STAMBUK -
+                    <?php if (auth()->user()->role == 1) {
+                        echo ' Super Admin ';
+                    } elseif (auth()->user()->role == 2) {
+                        echo ' Wali Kelas ';
+                    } elseif (auth()->user()->role == 3) {
+                        echo ' Guru Mata Pelajaran ';
+                    } ?>
                 </a>
             </li>
         </ul>
@@ -26,7 +33,7 @@
                 </div>
             </li>
             <li class="nav-item nav-logout d-none d-lg-block">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="#">
                     <i class="mdi mdi-home-circle"></i>
                 </a>
             </li>

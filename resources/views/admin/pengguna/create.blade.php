@@ -31,7 +31,7 @@
                         @csrf
                         @method('POST')
                         <div class="row">
-                            @if ($record)
+                            @if ($type == 2)
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Wali Kelas</label>
@@ -45,6 +45,20 @@
                                     </div>
                                 </div>
                                 <input type="hidden" name="role" value="2">
+                            @elseif ($type == 3)
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Guru Mapel</label>
+                                        <select class="form-control select2" name="id_join" id="id_join">
+                                            @foreach ($record as $i => $w)
+                                                <option value="{{ $w->id_gurumapel }}">
+                                                    {{ $w->nama_guru }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="role" value="4">
                             @else
                                 <input type="hidden" name="role" value="1">
                                 <div class="col-md-6">

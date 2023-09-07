@@ -21,6 +21,10 @@
                     <a href="{{ route('pengguna.create') . '?type=2' }}" class="btn btn-warning mt-2 mt-sm-0 btn-icon-text">
                         Tambah Wali Kelas
                     </a>
+                    <a href="{{ route('pengguna.create') . '?type=4' }}"
+                        class="btn btn-secondary mt-2 mt-sm-0 btn-icon-text">
+                        Tambah Guru Mapel
+                    </a>
                     <a href="{{ route('pengguna.index') }}" class="btn btn-info mt-2 mt-sm-0 btn-icon-text">
                         Refresh
                     </a>
@@ -62,6 +66,8 @@
                                                 <span class="badge bg-success">Admin</span>
                                             @elseif($r->role == 2)
                                                 <span class="badge bg-warning">Wali Kelas</span>
+                                            @elseif($r->role == 3)
+                                                <span class="badge bg-primary">Guru Mapel</span>
                                             @elseif($r->role == 0)
                                                 <span class="badge bg-secondary">Siswa</span>
                                             @endif
@@ -69,19 +75,11 @@
                                         <td>
                                             @if ($i != 1)
                                                 <form action="{{ route('pengguna.destroy', $r->id) }}" method="POST">
-                                                    @if ($r->role == 1)
-                                                        <a name="" id="" class="btn btn-sm btn-warning"
-                                                            href="{{ route('pengguna.edit', $r->id) . '?type=1' }}"
-                                                            role="button">
-                                                            Edit
-                                                        </a>
-                                                    @elseif($r->role == 2)
-                                                        <a name="" id="" class="btn btn-sm btn-warning"
-                                                            href="{{ route('pengguna.edit', $r->id) . '?type=2' }}"
-                                                            role="button">
-                                                            Edit
-                                                        </a>
-                                                    @endif
+                                                    <a name="" id="" class="btn btn-sm btn-warning"
+                                                        href="{{ route('pengguna.edit', $r->id) . '?type=' . $r->role }}"
+                                                        role="button">
+                                                        Edit
+                                                    </a>
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit"

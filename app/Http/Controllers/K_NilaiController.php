@@ -6,6 +6,7 @@ use App\Models\K_Nilai;
 use App\Models\Mapel;
 use App\Models\Nilai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class K_NilaiController extends Controller
 {
@@ -50,12 +51,12 @@ class K_NilaiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request)
+    public function show($id)
     {
-
-        $record = $kriteria_nilai;
-        $nilai = Nilai::all();
-        return view('admin.k_nilai.view', compact('record', 'k_nilai'));
+        $record = K_Nilai::where('idkriteria', '=', $id)->first();
+        $kriteria_nilai = K_Nilai::all();
+        $mapel = Mapel::all();
+        return view('admin.k_nilai.edit', compact('record', 'mapel'));
     }
 
     /**
@@ -63,6 +64,7 @@ class K_NilaiController extends Controller
      */
     public function edit(K_Nilai $nilai)
     {
+        dd($nilai);
         $record = $kriteria_nilai;
         $kriteria_nilai = K_Nilai::all();
         return view('admin.k_nilai.edit', compact('record', 'k_nilai'));
@@ -71,17 +73,21 @@ class K_NilaiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, K_Nilai $kriteria_nilai)
+    public function update(Request $request, $id)
     {
+        $kriteria_nilai = K_Nilai::where('idkriteria', '=', $id)->first();
         $request->validate([
-            'idkriteria'  => 'required',
             'idmapel'  => 'required',
             'kriteria'  => 'required',
         ]);
-        // dd($request->all());
 
-        $insert = $kriteria_nilai->update($request->all());
-        if ($insert) {
+        $data = [
+            'idmapel'  => $request->idmapel,
+            'kriteria'  => $request->kriteria,
+        ];
+
+        $update = DB::table('kriteria_nilai')->where('idkriteria', '=', $id)->update($data);
+        if ($update) {
             return redirect()->route("k_nilai.index")->with("success", "Data Kriteria $request->nkriteria berhasil diperbarui!");
         } else {
             return back()->withErrors('Gagal memperbarui data kriteria!');
@@ -93,7 +99,12 @@ class K_NilaiController extends Controller
      */
     public function destroy(K_Nilai $kriteria_nilai)
     {
-        $del = $kriteria_nilai->delete();
+        #
+    }
+
+    public function delete_k_nilai($id)
+    {
+        $del = K_Nilai::destroy($id);
         if ($del) {
             return redirect()->route("k_nilai.index")->with("success", "Data kriteria berhasil dihapus!");
         } else {

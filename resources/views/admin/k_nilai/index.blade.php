@@ -87,8 +87,8 @@
                         rows += `<tr><td> ${i+1} </td>
                         <td> ${res[i].kriteria} </td>
                         <td>
-                            <a name="" id="" class="btn btn-sm btn-warning" href="#" role="button"> Edit </a>
-                            <a name="" id="" class="btn btn-sm btn-danger" href="#" role="button"> Hapus </a>
+                            <a name="" id="" class="btn btn-sm btn-warning" href="{{ url('admin/k_nilai') }}/${res[i].idkriteria}" role="button"> Edit </a>
+                            <a name="" id="" class="btn btn-sm btn-danger" href="{{ url('admin/k_nilai') }}/${res[i].idkriteria}/delete" role="button"> Hapus </a>
                             </td></tr>`;
                     };
                     $("#judul").html("<strong>Menampilkan Kriteria Penilaian Mata Pelajaran " + mapel +
@@ -97,23 +97,5 @@
                 }
             });
         }
-        // $(function() {
-        //     $("#data_k_nilai").Datatable({
-        //         ajax: {
-        //             url: "{{ url('ajax/get_k_nilai') }}",
-        //             dataType: 'json',
-        //             success: function(res) {
-        //                 console.log(res);
-        //             }
-        //         }
-        //     })
-        //     // $.ajax({
-        //     //     url: "{{ url('ajax/get_k_nilai') }}",
-        //     //     dataType: 'json',
-        //     //     success: function(res) {
-        //     //         console.log(res);
-        //     //     }
-        //     // });
-        // })
     </script>
 @endsection

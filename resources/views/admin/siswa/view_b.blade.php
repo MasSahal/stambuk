@@ -137,6 +137,8 @@
                     <div class="mt-2">
                         <hr>
                         <a href="{{ route('siswa.index') }}" class="btn btn-secondary">Kembali</a>
+                        <a href="{{ route('siswa.print', $record->idsiswa) . '?aksi=profile' }}" class="btn btn-success"
+                            target="_blank">Print</a>
                     </div>
                 </div>
             </div>
